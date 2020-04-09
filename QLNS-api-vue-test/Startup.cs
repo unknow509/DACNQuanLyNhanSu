@@ -25,7 +25,7 @@ namespace QLNS_api_vue_test
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "vue-skills";
+                configuration.RootPath = "vue";
             });
         }
 
