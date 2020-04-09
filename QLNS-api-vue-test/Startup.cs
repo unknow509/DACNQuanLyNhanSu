@@ -53,7 +53,7 @@ namespace QLNS_api_vue_test
 
             app.UseSpa(spa =>
             {
-            spa.Options.SourcePath = "vue-skills"; 
+            spa.Options.SourcePath = "vue"; 
 
                 if (env.IsDevelopment())
             {
