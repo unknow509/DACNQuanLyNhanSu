@@ -68,8 +68,9 @@
         </div>
         <form>
           <!-------------------------------------------- Modal body ------------------------------>
-          <div class="modal-body">
-            <div class="form-group">
+          <div class="modal-body row">
+            <div class="col-6">
+              <div class="form-group">
               <input
                 v-model="form.HoTen"
                 type="text"
@@ -124,7 +125,10 @@
                 class="form-control"
               />
             </div>
-            <div class="form-group">
+            
+            </div>
+            <div class="col-6">
+              <div class="form-group">
               <input
                 v-model="form.DienThoai"
                 type="text"
@@ -134,7 +138,7 @@
                 maxlength="10"
               />
             </div>
-            <div class="form-group">
+                  <div class="form-group">
               <input
                 v-model="form.MaPhongBan"
                 type="number"
@@ -179,6 +183,9 @@
                 class="form-control"
               />
             </div>
+            </div>
+            
+            
           </div>
           <!--------------------------------------------Modal footer ---------------------------->
           <div class="modal-footer">
@@ -358,5 +365,8 @@ th {
 }
 button.swal2-cancel.btn.btn-danger {
   margin-right: 6em;
+}
+.modal{
+  width: 60%;
 }
 </style>
