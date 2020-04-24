@@ -22,8 +22,8 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
           <b-button id="logout" @click="logOut" v-show="this.$store.state.isLoggedIn" variant="outline-danger">Logout</b-button>
-          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
-          <b-button variant="secondary" size class="my-2 my-sm-0" type="submit">Search</b-button>
+          <b-form-input v-model="searchQuery" size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+          <b-button variant="secondary" size class="my-2 my-sm-0" @click="search" >Search</b-button>
         </b-nav-form>
       </b-navbar-nav>
     </b-navbar>
@@ -33,7 +33,7 @@
 export default {
     data() {
         return {
-            
+            searchQuery:''
         }
     },
     methods: {   
@@ -41,9 +41,13 @@ export default {
             this.$store.state.isLoggedIn=false;
             localStorage.removeItem("user_loggedin")
             this.$router.push('/login')          
-        },      
-    },
+        },    
+        search(){
+          EventBus.$emit('user-searched', this.searchQuery)
 
+        }  
+    },
+    
 }
 
 </script>

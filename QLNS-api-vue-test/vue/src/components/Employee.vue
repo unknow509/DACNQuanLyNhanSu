@@ -211,6 +211,7 @@ export default {
   data() {
     return {
       posts: [],
+      originPosts:[],
       positionId: [],
       showModal: false,
       editMode: true,
@@ -328,17 +329,28 @@ export default {
         .catch(e => {
           alert(e + "\n  Vui lòng nhập mã chức vụ ");
         });
+    },
+    getQuery(data){
+     this.posts = this.originPosts.filter((item)=>{
+       return item.hoTen.toLowerCase().includes(data.toLowerCase())
+     })
+        //console.log(this.posts)
+      
     }
   },
   created() {
     this.callPosition();
+    EventBus.$on('user-searched', data => {
+     this.getQuery(data)
+    });
   },
   mounted() {
     this.$http
       .get("http://localhost:61447/api/SampleData/findall")
       .then(function(res) {
         this.posts = res.body;
-       // console.log(res);
+        this.originPosts= res.body;
+        //console.log(res);
       })
       .catch(function(err) {
         console.log("Error: ", err);

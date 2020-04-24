@@ -12,6 +12,7 @@ import Swal from 'sweetalert2'
 import {store} from './store/store'
 //declare global jquery
 window.$ = jquery;
+window.EventBus = new Vue()
 //=======================
 Vue.use(BootstrapVue)
 Vue.use(router)
