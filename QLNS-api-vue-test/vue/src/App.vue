@@ -27,9 +27,12 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
-
+#app{
+  
+  background-image:url("./assets/bg.png"); 
+}
 body {
-  background-color: #eeeeee;
+  
   font-family: "Montserrat", sans-serif;
 }
 body,
@@ -39,7 +42,7 @@ html {
 }
 
 #nav-menu ul li a {
-  color: #313131;
+  color: #f0f8ff;
   font-size: larger;
   text-transform: uppercase;
 }
@@ -49,5 +52,8 @@ html {
 }
 #logout {
   margin: 0px 0.5em;
+}
+th,td{
+  color:aliceblue
 }
 </style>

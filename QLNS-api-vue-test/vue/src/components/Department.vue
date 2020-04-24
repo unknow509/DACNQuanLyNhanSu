@@ -1,7 +1,7 @@
-<template>
+<template >
   <div>
     <b-row>
-      <b-col md="2" offset-md="10">
+      <b-col md="2" offset-md="10" >
         <b-button class @click="createDep" variant="outline-info">Create department</b-button>
       </b-col>
     </b-row>
@@ -165,3 +165,8 @@ export default {
   
 }
 </script>
+<style  scoped>
+.col-md-12 {
+    height: 100vh;
+}
+</style>

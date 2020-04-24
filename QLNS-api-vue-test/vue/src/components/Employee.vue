@@ -7,7 +7,7 @@
     </b-row>
     <br />
     <b-row>
-      <b-col md="12">
+      <b-col class="height" md="12">
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
@@ -32,12 +32,12 @@
                 <td>{{ post.hoTen }}</td>
                 <td>{{post.gioiTinh}}</td>
                 <td>{{ post.dienThoai }}</td>
-                <td>{{ post.hoKhau }}</td>
+                <td >{{ post.hoKhau }}</td>
                 <td>{{ post.ngaySinh | formatDate }}</td>
-                <td>{{post.maPhongBan}}</td>
-                <td>{{ post.tenDangNhap }}</td>
-                <td>{{ post.matKhau }}</td>
-                <td>{{ post.thucLanh }}</td>
+                <td class="text-center">{{post.maPhongBan}}</td>
+                <td class="text-center">{{ post.tenDangNhap }}</td>
+                <td  class="text-center">{{ post.matKhau }}</td>
+                <td class="text-center">{{ post.thucLanh }}</td>
                 <td>
                   <b-button variant="success" @click="updateEmp(post)">Update</b-button>
                 </td>
@@ -180,6 +180,15 @@
                 type="text"
                 name="MatKhau"
                 placeholder="Mật khẩu"
+                class="form-control"
+              />
+            </div>
+            <div v-show="editMode" class="form-group">
+              <input
+                v-model="form.ThucLanh"
+                type="text"
+                name="Luong"
+                placeholder="Lương"
                 class="form-control"
               />
             </div>
@@ -366,19 +375,22 @@ export default {
 #skills {
   margin-top: 5em;
 }
-
-td,
-th {
+td{
+  text-align: left;
+}
+th{
   text-align: center;
 }
-
 .modal-header {
-  text-align: center;
+  text-align: left;
 }
 button.swal2-cancel.btn.btn-danger {
   margin-right: 6em;
 }
 .modal{
   width: 60%;
+}
+.height{
+  height: 100vh;
 }
 </style>
