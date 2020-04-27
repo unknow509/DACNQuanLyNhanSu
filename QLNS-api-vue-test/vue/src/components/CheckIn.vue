@@ -1,5 +1,5 @@
 !<template>
-  <div>
+  <div style="color:aliceblue">
     <h1 class="checkin-table-header">timesheets</h1>
     <b-form class="form-group">
       <div class="box">

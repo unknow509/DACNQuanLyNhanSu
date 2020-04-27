@@ -1,13 +1,13 @@
 ﻿<template>
-  <div>
-    <b-row>
+  <div >
+    
       <b-col md="2" offset-md="10">
         <b-button @click="createEmp" variant="outline-info">Create employee</b-button>
       </b-col>
-    </b-row>
+    
     <br />
-    <b-row>
-      <b-col class="height" md="12">
+    
+      <b-col md="12">
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
@@ -34,7 +34,7 @@
                 <td>{{ post.dienThoai }}</td>
                 <td >{{ post.hoKhau }}</td>
                 <td>{{ post.ngaySinh | formatDate }}</td>
-                <td class="text-center">{{post.maPhongBan}}</td>
+                <td class="text-center">{{post.tenPhongBan}}</td>
                 <td class="text-center">{{ post.tenDangNhap }}</td>
                 <td  class="text-center">{{ post.matKhau }}</td>
                 <td class="text-center">{{ post.thucLanh }}</td>
@@ -49,7 +49,7 @@
           </table>
         </div>
       </b-col>
-    </b-row>
+   
 
     <!-------------------------------------------- Modal Start -------------------------------->
     <div>
@@ -390,7 +390,5 @@ button.swal2-cancel.btn.btn-danger {
 .modal{
   width: 60%;
 }
-.height{
-  height: 100vh;
-}
+
 </style>

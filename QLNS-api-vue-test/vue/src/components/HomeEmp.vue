@@ -1,7 +1,7 @@
 <template>
   <div>
     <br />
-    <b-row>
+   
       <b-col md="12">
         <div class="table-responsive">
           <table class="table table-hover">
@@ -23,7 +23,7 @@
                 <td>{{ post.hoTen }}</td>
                 <td>{{post.gioiTinh}}</td>
                 <td>{{ post.dienThoai }}</td>
-                <td>{{ post.hoKhau }}</td>
+                <td >{{ post.hoKhau }}</td>
                 <td>{{ post.ngaySinh | formatDate }}</td>
                 <td>{{post.maPhongBan}}</td>
                 <td>{{post.maChucVu}}</td>
@@ -32,7 +32,7 @@
           </table>
         </div>
       </b-col>
-    </b-row>
+    
 </div>
 </template>
 
@@ -69,12 +69,12 @@ export default {
 #skills {
   margin-top: 5em;
 }
-
-td,
-th {
+th{
   text-align: center;
 }
-
+td:not(:nth-child(5)){
+  text-align: center;
+}
 .modal-header {
   text-align: center;
 }

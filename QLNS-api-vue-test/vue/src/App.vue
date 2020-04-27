@@ -1,46 +1,39 @@
 <template>
-  <div id="app">   
-    <Navbar/>
+  <div id="app">
+    <Navbar />
     <router-view />
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar'
-import {mapActions} from 'vuex';
+import Navbar from "./components/Navbar";
+import { mapActions } from "vuex";
 export default {
-  components:{Navbar},
+  components: { Navbar },
   name: "App",
   data() {
-    return {
-      
-    };
+    return {};
   },
   methods: {
-  ...mapActions(['docheckLogin']),
+    ...mapActions(["docheckLogin"])
   },
-  created(){
+  created() {
     this.docheckLogin();
-  },
+  }
 };
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
-#app{
-  
-  background-image:url("./assets/bg.png"); 
-}
-body {
-  
+#app {
   font-family: "Montserrat", sans-serif;
+  background-image: url("./assets/bg.png");
+  background-size: cover;
 }
-body,
 html {
-  margin: 0;
-  height: 100%;
+  background-image: url("./assets/bg.png");
+  background-size: cover;
 }
-
 #nav-menu ul li a {
   color: #f0f8ff;
   font-size: larger;
@@ -53,7 +46,8 @@ html {
 #logout {
   margin: 0px 0.5em;
 }
-th,td{
-  color:aliceblue
+th,
+td {
+  color: aliceblue;
 }
 </style>

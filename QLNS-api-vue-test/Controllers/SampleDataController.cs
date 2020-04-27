@@ -17,7 +17,23 @@ namespace QLNS_api_vue_test.Controllers
         {
             try
             {
-                var nhanviens = db.Nhanvien.ToList();
+                var nhanviens = from nv in db.Nhanvien
+                                join pb in db.Phongban
+                                on nv.MaPhongBan equals pb.MaPhongBan
+                                select new {nv.MaNhanVien,
+                                            nv.HoTen,
+                                nv.GioiTinh,
+                                    nv.SoCmnd,
+                                    nv.NgaySinh,
+                                    nv.NoiSinh,
+                                    nv.HoKhau,
+                                    nv.DienThoai,
+                                    nv.MaPhongBan,
+                                    pb.TenPhongBan,
+                                    nv.MaChucVu,
+                                    nv.TenDangNhap,
+                                    nv.MatKhau,
+                                    nv.ThucLanh};
                 return Ok(nhanviens);
             }
             catch
@@ -97,20 +113,6 @@ namespace QLNS_api_vue_test.Controllers
                 return BadRequest();
             }
         }
-        //[HttpPost("CheckIn")]/* checkin giờ vào*/
-        //public async Task<IActionResult> CheckIn([FromBody] Chitietchamcong TimeCheckIn)
-        //{
-        //    try
-        //    {
-        //        db.Chitietchamcong.Add(TimeCheckIn);
-        //        db.SaveChanges();
-        //        return Ok(TimeCheckIn);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest();
-        //    }
-        //}
         //*************************************PUT**************************************
         [HttpPut("update")] /*  nhân viên */
         public async Task<IActionResult> Update([FromBody] Nhanvien nhanvien)
