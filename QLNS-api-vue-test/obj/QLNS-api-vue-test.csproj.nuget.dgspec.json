@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GIThub\\DACNQuanLyNhanSu\\QLNS-api-vue-test\\QLNS-api-vue-test.csproj": {}
+    "D:\\GIThub\\DACNQuanLyNhanSu-master\\QLNS-api-vue-test\\QLNS-api-vue-test.csproj": {}
   },
   "projects": {
-    "D:\\GIThub\\DACNQuanLyNhanSu\\QLNS-api-vue-test\\QLNS-api-vue-test.csproj": {
+    "D:\\GIThub\\DACNQuanLyNhanSu-master\\QLNS-api-vue-test\\QLNS-api-vue-test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GIThub\\DACNQuanLyNhanSu\\QLNS-api-vue-test\\QLNS-api-vue-test.csproj",
+        "projectUniqueName": "D:\\GIThub\\DACNQuanLyNhanSu-master\\QLNS-api-vue-test\\QLNS-api-vue-test.csproj",
         "projectName": "QLNS-api-vue-test",
-        "projectPath": "D:\\GIThub\\DACNQuanLyNhanSu\\QLNS-api-vue-test\\QLNS-api-vue-test.csproj",
+        "projectPath": "D:\\GIThub\\DACNQuanLyNhanSu-master\\QLNS-api-vue-test\\QLNS-api-vue-test.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\GIThub\\DACNQuanLyNhanSu\\QLNS-api-vue-test\\obj\\",
+        "outputPath": "D:\\GIThub\\DACNQuanLyNhanSu-master\\QLNS-api-vue-test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -18,7 +18,7 @@
           <td>{{field.day | formatDate}}</td>
           <td>{{ field.status }}</td>
           <td>
-            <b-button @click="UpdateChiTietChamCong(field)" variant="success">Check</b-button>
+            <b-button @click="UpdateChiTietChamCong(field,index)" variant="success">Check</b-button>
           </td>
         </tr>
       </tbody>
@@ -70,7 +70,7 @@
           </div>
           <!--------------------------------------------Modal footer ---------------------------->
           <div class="modal-footer">
-            <button @click="updateSubmit" type="submit" class="btn btn-success">Check</button>
+            <button @click="updateSubmit($event)" type="submit" class="btn btn-success">Check</button>
             <button
               type="button"
               class="btn btn-danger"
@@ -102,17 +102,20 @@ export default {
   },
   methods: {
     getAllPending() {
+      
       axios
         .get("http://localhost:61447/api/CheckIn/GetAllPending")
         .then(res => {
-          this.fields = res.data;
-          //console.log(res.data);
+          this.fields = res.data.sort((a,b)=>{
+        return new Date(b.day).getTime() - new Date(a.day).getTime();
+      })
+          // console.log( this.fields);
         })
         .catch(err => {
           console.log("error get pending", err);
         });
     },
-    UpdateChiTietChamCong(ctcc) {
+    UpdateChiTietChamCong(ctcc,index) {
        this.showModal = true;
         (this.form.MaNhanVien = ctcc.maNhanVien),
         (this.form.GioBatDau = ctcc.gioBatDau),
@@ -120,10 +123,12 @@ export default {
         (this.form.Day = ctcc.day),
         (this.form.Status = null);
     },
-    updateSubmit() {
+    updateSubmit(event) {
+       if (event) event.preventDefault()
       axios.put('http://localhost:61447/api/CheckIn/Update',this.form)
       .then(res=>{
-        alert('success')
+       this.$bvModal.hide('modalFormAdmin')
+        this.fields.splice(this.tempId, 1);      
       })
     }
   },

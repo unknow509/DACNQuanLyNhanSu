@@ -28,7 +28,7 @@
             </thead>
             <tbody>
               <tr v-for="(post, index) in posts" :key="post.maNhanVien">
-                <td>{{ ++index }}</td>
+                <td>{{ index+1 }}</td>
                 <td>{{ post.hoTen }}</td>
                 <td>{{post.gioiTinh}}</td>
                 <td>{{ post.dienThoai }}</td>
@@ -39,10 +39,10 @@
                 <td  class="text-center">{{ post.matKhau }}</td>
                 <td class="text-center">{{ post.thucLanh }}</td>
                 <td>
-                  <b-button variant="success" @click="updateEmp(post)">Update</b-button>
+                  <b-button variant="success" @click="updateEmp(post,index)">Update</b-button>
                 </td>
                 <td>
-                  <b-button variant="danger" @click="deleteEmp(post.maNhanVien)">Delete</b-button>
+                  <b-button variant="danger" @click="deleteEmp(post.maNhanVien,index)">Delete</b-button>
                 </td>
               </tr>
             </tbody>
@@ -198,8 +198,8 @@
           </div>
           <!--------------------------------------------Modal footer ---------------------------->
           <div class="modal-footer">
-            <button v-show="!editMode" @click="createbtn" type="submit" class="btn btn-primary">Tạo</button>
-            <button v-show="editMode" @click="updateSubmit" type="submit" class="btn btn-success">Sửa</button>
+            <button v-show="!editMode" @click="createbtn($event)" type="submit" class="btn btn-primary">Tạo</button>
+            <button v-show="editMode" @click="updateSubmit($event)" type="submit" class="btn btn-success">Sửa</button>
             <button
               type="button"
               class="btn btn-danger"
@@ -222,6 +222,7 @@ export default {
       posts: [],
       originPosts:[],
       positionId: [],
+      tempId:null,
       showModal: false,
       editMode: true,
       deleteMode: false,
@@ -272,9 +273,10 @@ export default {
       this.resetForm();
     },
 
-    updateEmp(nhanvien) {
+    updateEmp(nhanvien,index) {
       this.editMode = true;
       this.showModal = true;
+      this.tempId=index;
       (this.form.MaNhanVien = nhanvien.maNhanVien),
         (this.form.HoTen = nhanvien.hoTen),
         (this.form.GioiTinh = nhanvien.gioiTinh),
@@ -289,22 +291,25 @@ export default {
         (this.form.MatKhau = nhanvien.matKhau),
         (this.form.ThucLanh = nhanvien.thucLanh);
     },
-    updateSubmit() {
+    updateSubmit(event) {
+       if (event) event.preventDefault()
       axios.put("/api/SampleData/update", this.form).then(res => {
-        console.log("udpate thành công");
+        this.$bvModal.hide('modalFormAdmin')
+        console.log(res)
       });
     },
-    deleteEmp(id) {
+    deleteEmp(id,index) {
       //console.log(id);
+      this.tempId=index;
       swalWithBootstrapButtons
         .fire({
           title: "Are you sure?",
           text: "You won't be able to revert this!",
           icon: "warning",
           showCancelButton: true,
+           cancelButtonText: "No, cancel!",
           confirmButtonText: "Yes, delete it!",
-          cancelButtonText: "No, cancel!",
-          reverseButtons: true
+          reverseButtons: false
         })
         .then(result => {
           if (result.value) {
@@ -314,10 +319,9 @@ export default {
                 "Your file has been deleted.",
                 "success"
               );
-              location.reload();
+              this.posts.splice(this.tempId, 1);   
             });
           } else if (
-            
             result.dismiss === Swal.DismissReason.cancel
           ) {
             swalWithBootstrapButtons.fire(
@@ -329,20 +333,25 @@ export default {
         });
     },
     //
-    createbtn() {
+    createbtn(event) {
+      if(event) event.preventDefault();
       axios
         .post("http://localhost:61447/api/SampleData/create", this.form)
         .then(response => {
           //console.log(response);
+           this.$bvModal.hide('modalFormAdmin')
+           console.log('trc khi push',this.posts);           
+            this.posts.push(this.posts[this.post.length]);
+            console.log('sau khi puash',this.posts);
         })
         .catch(e => {
-          alert(e + "\n  Vui lòng nhập mã chức vụ ");
+          
         });
     },
     getQuery(data){
      this.posts = this.originPosts.filter((item)=>{
-       return item.hoTen.toLowerCase().includes(data.toLowerCase())
-     })
+       return item.hoTen.toLowerCase().includes(data.toLowerCase());
+     });
         //console.log(this.posts)
       
     }
