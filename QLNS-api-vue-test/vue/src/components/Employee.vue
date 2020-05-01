@@ -295,7 +295,7 @@ export default {
        if (event) event.preventDefault()
       axios.put("/api/SampleData/update", this.form).then(res => {
         this.$bvModal.hide('modalFormAdmin')
-        console.log(res)
+         this.posts[this.tempId]=res.data;
       });
     },
     deleteEmp(id,index) {
