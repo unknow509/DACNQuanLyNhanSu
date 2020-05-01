@@ -338,11 +338,9 @@ export default {
       axios
         .post("http://localhost:61447/api/SampleData/create", this.form)
         .then(response => {
-          //console.log(response);
-           this.$bvModal.hide('modalFormAdmin')
-           console.log('trc khi push',this.posts);           
-            this.posts.push(this.posts[this.post.length]);
-            console.log('sau khi puash',this.posts);
+         // console.log(response);
+           this.$bvModal.hide('modalFormAdmin');                   
+            this.posts.push(response.data);
         })
         .catch(e => {
           
