@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       login: {
-        username: "",
+        username: "afsd",
         password: ""
       }
     };
@@ -55,19 +55,38 @@ export default {
    ...mapActions(['docheckLogin','doCheckEmp']),
     
     LogIn() {
-      axios.post("/api/Admin/login", this.login).then(response => {
+      if(this.checkNullValue(this.login)){
+        axios.post("/api/Admin/login", this.login).then(response => {
         this.$store.state.userInfo = response.data;
         localStorage.setItem("user_loggedin", JSON.stringify({ response }));       
         this.docheckLogin();        
       })
       .catch(err=>{
-        (e.dismiss === Swal.DismissReason.cancel) 
+        (err.dismiss === Swal.DismissReason.cancel) 
             swalWithBootstrapButtons.fire(
               "Đăng nhập thất bại",
               "Sai tài khoản hoặc mật khẩu",
               "error"
             );
       })
+      }else{
+         swalWithBootstrapButtons.fire(
+              "Đăng nhập thất bại",
+              "Vui lòng không để trống tài khoản hoặc mật khẩu",
+              "error"
+            );
+      }
+      
+      
+    },
+    checkNullValue(loginForm){
+      
+      for (let key in loginForm) {
+        if(loginForm[key]===null || loginForm[key]=== undefined || loginForm[key]===''){
+          return false;
+        }
+      }
+      return true;
     }
   },
   destroyed(){

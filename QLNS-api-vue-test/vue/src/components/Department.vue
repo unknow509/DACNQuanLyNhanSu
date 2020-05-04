@@ -20,13 +20,13 @@
             </thead>
             <tbody>
               <tr v-for="(phongban,index) in phongbans" :key="phongban.maPhongban">
-                <td>{{ ++index }}</td>
+                <td>{{ index+1 }}</td>
                 <td>{{ phongban.tenPhongBan }}</td>
                 <td>
-                  <b-button variant="success" @click="updateDep(phongban)">Update</b-button>
+                  <b-button variant="success" @click="updateDep(phongban,index)">Update</b-button>
                 </td>
                 <td>
-                  <b-button variant="danger" @click="deleteDep(phongban.maPhongBan)">Delete</b-button>
+                  <b-button variant="danger" @click="deleteDep(phongban.maPhongBan,index)">Delete</b-button>
                 </td>
               </tr>
             </tbody>
@@ -59,8 +59,8 @@
           </div>
           <!----------------------------------Modal footer ---------------------------------->
           <div class="modal-footer">
-            <button v-show="!editMode" @click="createSubmit" type="submit" class="btn btn-primary">Tạo</button>
-            <button v-show="editMode" @click="updateSubmit" type="submit" class="btn btn-success">Sửa</button>
+            <button v-show="!editMode" @click="createSubmit($event)" type="submit" class="btn btn-primary">Tạo</button>
+            <button v-show="editMode" @click="updateSubmit($event)" type="submit" class="btn btn-success">Sửa</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal" @click="$bvModal.hide('modalFormAdmin')">Close</button>
           </div>
         </form>
@@ -76,45 +76,50 @@ export default {
   data(){
     return{
       phongbans:[],
+      tempId:null,
       showModal: false,
       editMode: true,
       deleteMode:false,
       form:{
-        MaPhongBan:'',
-        TenPhongBan:''
-      }
+        maPhongBan:'',
+        tenPhongBan:''
+      },
     };
   },
   methods: {
     resetForm(){
-      this.TenPhongBan=''
+      this.tenPhongBan=''
     },
     createDep() {
       this.editMode = false
       this.showModal = true
-      this.resetForm()
+      this.resetForm();
 
     },
-    updateDep(name){
+    updateDep(name,index){
       this.editMode = true
       this.showModal = true
+      this.tempId=index;
       this.form.TenPhongBan = name.tenPhongBan
       this.form.MaPhongBan = name.maPhongBan
     },
-    updateSubmit(){
-      axios.put("/api/SampleData/UpdateDeparment" , this.form)
-    },
-    // deleteDep(){
-    //   this.deleteMode = true
-    // },
-    createSubmit(){
-      axios.post("/api/SampleData/CreateDeparment",this.form).then(()=>{
-       this.$router.push('/department');
+    updateSubmit(event){
+      if(event) event.preventDefault();
+      axios.put("/api/SampleData/UpdateDeparment" , this.form).then(res=>{
+        this.$bvModal.hide('modalFormAdmin')
+         this.phongbans[this.tempId]=res.data;
       })
+    },
+    createSubmit(event){
+      if(event) event.preventDefault();
+      axios.post("/api/SampleData/CreateDeparment",this.form).then(res=>{
+        this.$bvModal.hide('modalFormAdmin');
+        this.phongbans.push(res.data)
+        })
      
     },   
-    deleteDep(idDep) {
-     console.log(idDep)
+    deleteDep(idDep,index){
+     this.tempId=index;
       swalWithBootstrapButtons
         .fire({
           title: "Are you sure?",
@@ -123,31 +128,18 @@ export default {
           showCancelButton: true,
           confirmButtonText: "Yes, delete it!",
           cancelButtonText: "No, cancel!",
-          reverseButtons: true
         })
         .then(result => {
           if (result.value) {
-            axios.delete("/api/SampleData/DeleteDeparment/" + idDep).then(()=>{
-
+            axios.delete("/api/SampleData/DeleteDeparment/" + idDep).then((res)=>{
                 swalWithBootstrapButtons.fire(
                 "Deleted!",
                 "Your file has been deleted.",
                 "success"
                 );
-                setTimeout(function(){this.$router.push('/department')}, 1000);    //location.reload().then(()=>{this.$router.push('/department')})            
-                
+                this.phongbans.splice(this.tempId, 1);                       
             })
           } 
-          else if (
-            /* Read more about handling dismissals below */
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire(
-              "Cancelled",
-              "Your imaginary file is safe :)",
-              "error"
-            );
-          }
         });
     }
   },

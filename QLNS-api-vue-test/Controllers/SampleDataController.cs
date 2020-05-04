@@ -90,14 +90,32 @@ namespace QLNS_api_vue_test.Controllers
                 //nhanvien.MaNhanVien = db.Nhanvien.Max(t => t.MaNhanVien) + 1;
                 db.Nhanvien.Add(nhanvien);
                 db.SaveChanges();
-                return Ok(nhanvien);
+                var singlenv = db.Nhanvien.OrderByDescending(x => x.MaNhanVien).First();
+                var GetSingle = from nv in db.Nhanvien
+                                join pb in db.Phongban
+                                on nv.MaPhongBan equals pb.MaPhongBan
+                                where singlenv.MaNhanVien == nv.MaNhanVien 
+                                select new
+                                {
+                                    nv.HoTen,
+                                    nv.GioiTinh,
+                                    nv.NgaySinh,
+                                    nv.HoKhau,
+                                    nv.DienThoai,
+                                    pb.TenPhongBan,
+                                    nv.TenDangNhap,
+                                    nv.MatKhau,
+                                    nv.ThucLanh
+                                };
+
+                return Ok(GetSingle);
             }
             catch (Exception ex)
             {
                 return BadRequest();
             }
         }
-
+       
         [HttpPost("CreateDeparment")] /* tạo phòng ban */
         public async Task<IActionResult> CreateDeparment([FromBody] Phongban phongban)
         {
@@ -114,6 +132,7 @@ namespace QLNS_api_vue_test.Controllers
             }
         }
         //*************************************PUT**************************************
+        
         [HttpPut("update")] /*  nhân viên */
         public async Task<IActionResult> Update([FromBody] Nhanvien nhanvien)
         {
@@ -130,7 +149,7 @@ namespace QLNS_api_vue_test.Controllers
                 return BadRequest();
             }
         }
-
+        
         [HttpPut("UpdateDeparment")] /*  phòng ban */
         public async Task<IActionResult> UpdateDeparment([FromBody] Phongban phongban)
         {

@@ -20,12 +20,17 @@ namespace QLNS_api_vue_test.Controllers
         private DACNQuanLyNhanSuContext db = new DACNQuanLyNhanSuContext();
 
         [HttpPost("login")]
-        public Nhanvien Login([FromBody] LoginNhanVien nhanvien)
+        public async Task<IActionResult> Login([FromBody] LoginNhanVien nhanvien)
         {
 
-            return db.Nhanvien.FirstOrDefault(t => t.TenDangNhap == nhanvien.username && t.MatKhau == nhanvien.password);
-
-
+            var nv = db.Nhanvien.FirstOrDefault(t => t.TenDangNhap == nhanvien.username && t.MatKhau == nhanvien.password);
+            if(nv != null){
+                return Ok(nv);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         //public IQueryable<Nhanvien> Login(string username, string password)

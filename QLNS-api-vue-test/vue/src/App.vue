@@ -50,4 +50,7 @@ th,
 td {
   color: aliceblue;
 }
+button.swal2-cancel.btn.btn-danger {
+    margin-left: 2.3rem;
+}
 </style>

@@ -72,7 +72,7 @@
             <div class="col-6">
               <div class="form-group">
               <input
-                v-model="form.HoTen"
+                v-model="form.hoTen"
                 type="text"
                 name="HoTen"
                 placeholder="Họ tên"
@@ -81,7 +81,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="form.SoCMND"
+                v-model="form.soCMND"
                 type="text"
                 name="SoCMND"
                 placeholder="Số CMND"
@@ -91,7 +91,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="form.GioiTinh"
+                v-model="form.gioiTinh"
                 type="text"
                 name="GioiTinh"
                 placeholder="Giới tính"
@@ -100,7 +100,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="form.NgaySinh"
+                v-model="form.ngaySinh"
                 type="text"
                 name="NgaySinh"
                 placeholder="Ngày sinh"
@@ -109,7 +109,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="form.NoiSinh"
+                v-model="form.noiSinh"
                 type="text"
                 name="NoiSinh"
                 placeholder="Nơi sinh"
@@ -118,7 +118,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="form.HoKhau"
+                v-model="form.hoKhau"
                 type="text"
                 name="HoKhau"
                 placeholder="Hộ khẩu"
@@ -130,7 +130,7 @@
             <div class="col-6">
               <div class="form-group">
               <input
-                v-model="form.DienThoai"
+                v-model="form.dienThoai"
                 type="text"
                 name="DienThoai"
                 placeholder="Số điện thoại"
@@ -140,7 +140,7 @@
             </div>
                   <div class="form-group">
               <input
-                v-model="form.MaPhongBan"
+                v-model="form.maPhongBan"
                 type="number"
                 name="MaPhongBan"
                 placeholder="Mã phòng ban"
@@ -152,7 +152,7 @@
             <div class="form-group">
               <select
                 name="MaChucVu"
-                v-model="form.MaChucVu"
+                v-model="form.maChucVu"
                 id="MaChucVu"
                 placeholder="Mã chức vụ"
                 class="form-control"
@@ -167,7 +167,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="form.TenDangNhap"
+                v-model="form.tenDangNhap"
                 type="text"
                 name="TenDangNhap"
                 placeholder="Tên đăng nhập"
@@ -176,7 +176,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="form.MatKhau"
+                v-model="form.matKhau"
                 type="text"
                 name="MatKhau"
                 placeholder="Mật khẩu"
@@ -185,7 +185,7 @@
             </div>
             <div v-show="editMode" class="form-group">
               <input
-                v-model="form.ThucLanh"
+                v-model="form.thucLanh"
                 type="text"
                 name="Luong"
                 placeholder="Lương"
@@ -227,35 +227,38 @@ export default {
       editMode: true,
       deleteMode: false,
       form: {
-        MaNhanVien: 0,
-        HoTen: null,
-        GioiTinh: null,
-        SoCMND: null,
-        NgaySinh: null,
-        NoiSinh: null,
-        HoKhau: null,
-        DienThoai: null,
-        MaPhongBan: null,
-        MaChucVu: null,
-        TenDangNhap: null,
-        MatKhau: null,
-        ThucLanh: null
+        maNhanVien: 0,
+        hoTen: null,
+        gioiTinh: null,
+        soCMND: null,
+        ngaySinh: null,
+        noiSinh: null,
+        hoKhau: null,
+        dienThoai: null,
+        maPhongBan: null,
+        maChucVu: null,
+        tenDangNhap: null,
+        matKhau: null,
+        thucLanh: null,
+         tenPhongBan:null
       }
     };
   },
   methods: {
     resetForm() {
-      (this.form.HoTen = ""),
-        (this.form.GioiTinh = ""),
-        (this.form.SoCMND = ""),
-        (this.form.NgaySinh = ""),
-        (this.form.NoiSinh = ""),
-        (this.form.HoKhau = ""),
-        (this.form.DienThoai = ""),
-        (this.form.MaPhongBan = ""),
-        (this.form.MaChucVu = ""),
-        (this.form.TenDangNhap = ""),
-        (this.form.MatKhau = "");
+      (this.form.hoTen = ""),
+        (this.form.gioiTinh = ""),
+        (this.form.soCMND = ""),
+        (this.form.ngaySinh = ""),
+        (this.form.noiSinh = ""),
+        (this.form.hoKhau = ""),
+        (this.form.dienThoai = ""),
+        (this.form.maPhongBan = ""),
+        (this.form.maChucVu = ""),
+        (this.form.tenDangNhap = ""),
+        (this.form.thucLanh=""),
+        (this.form.maNhanVien=0),
+        (this.form.matKhau = "");
     },
     callPosition() {
       axios
@@ -277,25 +280,31 @@ export default {
       this.editMode = true;
       this.showModal = true;
       this.tempId=index;
-      (this.form.MaNhanVien = nhanvien.maNhanVien),
-        (this.form.HoTen = nhanvien.hoTen),
-        (this.form.GioiTinh = nhanvien.gioiTinh),
-        (this.form.SoCMND = nhanvien.soCmnd),
-        (this.form.NgaySinh = nhanvien.ngaySinh),
-        (this.form.NoiSinh = nhanvien.noiSinh),
-        (this.form.HoKhau = nhanvien.hoKhau),
-        (this.form.DienThoai = nhanvien.dienThoai),
-        (this.form.MaPhongBan = nhanvien.maPhongBan),
-        (this.form.MaChucVu = nhanvien.maChucVu),
-        (this.form.TenDangNhap = nhanvien.tenDangNhap),
-        (this.form.MatKhau = nhanvien.matKhau),
-        (this.form.ThucLanh = nhanvien.thucLanh);
+      (this.form.maNhanVien = nhanvien.maNhanVien),
+        (this.form.hoTen = nhanvien.hoTen),
+        (this.form.gioiTinh = nhanvien.gioiTinh),
+        (this.form.soCMND = nhanvien.soCmnd),
+        (this.form.ngaySinh = nhanvien.ngaySinh),
+        (this.form.noiSinh = nhanvien.noiSinh),
+        (this.form.hoKhau = nhanvien.hoKhau),
+        (this.form.dienThoai = nhanvien.dienThoai),
+        (this.form.maPhongBan = nhanvien.maPhongBan),
+        (this.form.maChucVu = nhanvien.maChucVu),
+        (this.form.tenDangNhap = nhanvien.tenDangNhap),
+        (this.form.matKhau = nhanvien.matKhau);
+        (this.form.thucLanh = nhanvien.thucLanh),
+        (this.form.tenPhongBan=nhanvien.tenPhongBan);
     },
     updateSubmit(event) {
        if (event) event.preventDefault()
       axios.put("/api/SampleData/update", this.form).then(res => {
         this.$bvModal.hide('modalFormAdmin')
+        //console.log(res)
+        // this.posts[this.tempId]=this.form;  //cách 1
          this.posts[this.tempId]=res.data;
+         this.posts[this.tempId].tenPhongBan=this.form.tenPhongBan;
+         this.resetForm();
+          //cách 2
       });
     },
     deleteEmp(id,index) {
@@ -321,15 +330,8 @@ export default {
               );
               this.posts.splice(this.tempId, 1);   
             });
-          } else if (
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire(
-              "Cancelled",
-              "Your imaginary file is safe :",
-              "error"
-            );
           }
+          //  
         });
     },
     //
@@ -339,19 +341,17 @@ export default {
         .post("http://localhost:61447/api/SampleData/create", this.form)
         .then(response => {
          // console.log(response);
-           this.$bvModal.hide('modalFormAdmin');                   
-            this.posts.push(response.data);
+          this.$bvModal.hide('modalFormAdmin');                   
+          this.posts.push(response.data[0]);
         })
-        .catch(e => {
-          
+        .catch(e => {          
         });
     },
     getQuery(data){
      this.posts = this.originPosts.filter((item)=>{
        return item.hoTen.toLowerCase().includes(data.toLowerCase());
      });
-        //console.log(this.posts)
-      
+        //console.log(this.posts)     
     }
   },
   created() {
