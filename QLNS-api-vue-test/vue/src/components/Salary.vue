@@ -9,12 +9,9 @@
               <tr>
                 <th>STT</th>
                 <th>Name</th>
-                <th>Sex</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>DOB</th>
                 <th>Department</th>
                 <th>Position</th>
+                <th>Salary</th>
               </tr>
             </thead>
             <tbody>
@@ -41,42 +38,21 @@
 export default {
   data() {
     return {
-      posts: [],
+     
     };
   },
   methods: {
 
   }
-    ,
-  mounted() {
-    this.$http
-      .get("http://localhost:61447/api/SampleData/findall")
-      .then(function(res) {
-        this.posts = res.body;
-        console.log(res);
-      })
-      .catch(function(err) {
-        console.log("Error: ", err);
-      });
-  }
+    
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-
-
 th{
   text-align: center;
 }
-td:not(:nth-child(5)){
-  text-align: center;
-}
-.modal-header {
-  text-align: center;
-}
-button.swal2-cancel.btn.btn-danger {
-  margin-right: 6em;
-}
+
 </style>

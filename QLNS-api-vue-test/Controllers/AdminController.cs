@@ -32,18 +32,5 @@ namespace QLNS_api_vue_test.Controllers
                 return NotFound();
             }
         }
-
-        //public IQueryable<Nhanvien> Login(string username, string password)
-        //{
-        //    try
-        //    {
-        //        var u = db.Nhanvien.Where(t => t.TenDangNhap == username && t.MatKhau == password && t.MaChucVu == "gd" && t.MaChucVu == "pgd" && t.MaChucVu == "ql");
-        //        return u;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return null;
-        //    }
-        //}
     }
 }

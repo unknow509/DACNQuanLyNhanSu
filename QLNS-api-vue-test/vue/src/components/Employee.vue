@@ -377,11 +377,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
-#skills {
-  margin-top: 5em;
-}
+
 td{
   text-align: left;
 }

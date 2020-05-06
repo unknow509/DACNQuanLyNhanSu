@@ -6,6 +6,7 @@ import Login from './components/Login.vue'
 import CheckIn from './components/CheckIn.vue'
 import Pending from './components/Pending.vue'
 import HomeEmp from './components/HomeEmp.vue'
+import Salary from './components/Salary.vue'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
     path:'/homeemp',
     name: 'homeemp',
     component: HomeEmp
+  },
+  {
+    path:'/salary',
+    name: 'salary',
+    component: Salary
   },
     ],
      mode: 'history'
