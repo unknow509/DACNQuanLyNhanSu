@@ -24,7 +24,8 @@ namespace QLNS_api_vue_test.Controllers
         {
 
             var nv = db.Nhanvien.FirstOrDefault(t => t.TenDangNhap == nhanvien.username && t.MatKhau == nhanvien.password);
-            if(nv != null){
+            if (nv != null)
+            {
                 return Ok(nv);
             }
             else

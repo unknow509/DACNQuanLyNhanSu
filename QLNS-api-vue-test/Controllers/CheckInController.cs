@@ -31,10 +31,10 @@ namespace QLNS_api_vue_test.Controllers
                                   ctcc.GioKetThuc,
                                   ctcc.Day,
                                   nv.HoTen
-                                    };
+                              };
                 return Ok(pending);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }

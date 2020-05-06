@@ -60,6 +60,10 @@ namespace QLNS_api_vue_test.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.TinhLuong)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.HasOne(d => d.DayNavigation)
                     .WithMany(p => p.Chitietchamcong)
                     .HasForeignKey(d => d.Day)
