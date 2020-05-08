@@ -62,7 +62,7 @@
               >
                 <option selected disabled>Pending</option>
                 <option value="Acecpt">Acecpt</option>
-                <option value="Delete">Delete</option>
+                <option value="Delete">Delet</option>
               </select>
              
             </div>
@@ -96,7 +96,8 @@ export default {
         GioBatDau: null,
         GioKetThuc: null,
         Day: null,
-        Status:"pending"
+        Status:"pending",
+       
       }
     };
   },

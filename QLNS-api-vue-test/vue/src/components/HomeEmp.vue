@@ -15,7 +15,9 @@
                 <th>DOB</th>
                 <th>Department</th>
                 <th>Position</th>
+                
               </tr>
+            
             </thead>
             <tbody>
               <tr v-for="(post, index) in posts" :key="post.maNhanVien">
@@ -53,7 +55,7 @@ export default {
       .get("http://localhost:61447/api/SampleData/findall")
       .then(function(res) {
         this.posts = res.body;
-        console.log(res);
+       // console.log(res);
       })
       .catch(function(err) {
         console.log("Error: ", err);

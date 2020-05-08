@@ -14,8 +14,7 @@
                 <th>STT</th>
                 <th>Name </th>
                 <th>Update</th>
-                <th>Delete</th>
-                
+                <th>Delete</th>               
               </tr>
             </thead>
             <tbody>

@@ -12,7 +12,7 @@ namespace QLNS_api_vue_test.Models
 
         public string MaChucVu { get; set; }
         public string TenChucVu { get; set; }
-        public decimal? LuongCb { get; set; }
+        public double? HeSoLuong { get; set; }
 
         public virtual ICollection<Nhanvien> Nhanvien { get; set; }
     }

@@ -52,8 +52,8 @@ export default {
         Day: null,
         GioBatDau: null,
         GioKetThuc: null,
-          Status: null,
-        blabla:null
+        Status: null,
+        TinhLuong:'No'
       }
     };
   },

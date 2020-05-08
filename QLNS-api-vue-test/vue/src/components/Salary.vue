@@ -1,8 +1,7 @@
 <template>
   <div>
     <br />
-   
-      <b-col md="12">
+         <b-col md="12">
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
@@ -12,18 +11,17 @@
                 <th>Department</th>
                 <th>Position</th>
                 <th>Salary</th>
+                <th>Status checkin</th>            
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(post, index) in posts" :key="post.maNhanVien">
-                <td>{{ ++index }}</td>
-                <td>{{ post.hoTen }}</td>
-                <td>{{post.gioiTinh}}</td>
-                <td>{{ post.dienThoai }}</td>
-                <td >{{ post.hoKhau }}</td>
-                <td>{{ post.ngaySinh | formatDate }}</td>
-                <td>{{post.maPhongBan}}</td>
-                <td>{{post.maChucVu}}</td>
+              <tr v-for="(field,index)  in fields" :key="index">
+              <th>{{index+1}}</th>
+              <th>{{field.hoTen}}</th>
+              <th>{{field.tenPhongBan}}</th>
+              <th>{{field.tenChucVu}}</th>
+              <th></th>
+              <th>{{field.status}}</th>
               </tr>
             </tbody>
           </table>
@@ -38,12 +36,23 @@
 export default {
   data() {
     return {
+     fields:[],
      
     };
   },
   methods: {
-
-  }
+  },
+mounted() {
+  axios.get("/api/CheckIn/GetSalary")
+  .then(res=>{
+    this.fields=res.data;
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+  
+},
+  
     
 };
 </script>

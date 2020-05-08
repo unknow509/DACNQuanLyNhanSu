@@ -21,7 +21,7 @@
                 <th>Department</th>
                 <th>Account</th>
                 <th>PW</th>
-                <th>Salary($)</th>
+                <!-- <th>Salary($)</th> -->
                 <th>Update</th>
                 <th>Delete</th>
               </tr>
@@ -37,7 +37,7 @@
                 <td class="text-center">{{post.tenPhongBan}}</td>
                 <td class="text-center">{{ post.tenDangNhap }}</td>
                 <td  class="text-center">{{ post.matKhau }}</td>
-                <td class="text-center">{{ post.thucLanh }}</td>
+                <!-- <td class="text-center">{{ post.thucLanh }}</td> -->
                 <td>
                   <b-button variant="success" @click="updateEmp(post,index)">Update</b-button>
                 </td>
@@ -183,7 +183,7 @@
                 class="form-control"
               />
             </div>
-            <div v-show="editMode" class="form-group">
+            <!-- <div v-show="editMode" class="form-group">
               <input
                 v-model="form.thucLanh"
                 type="text"
@@ -191,7 +191,7 @@
                 placeholder="Lương"
                 class="form-control"
               />
-            </div>
+            </div> -->
             </div>
             
             
@@ -239,8 +239,7 @@ export default {
         maChucVu: null,
         tenDangNhap: null,
         matKhau: null,
-        thucLanh: null,
-         tenPhongBan:null
+        tenPhongBan:null
       }
     };
   },
@@ -256,7 +255,6 @@ export default {
         (this.form.maPhongBan = ""),
         (this.form.maChucVu = ""),
         (this.form.tenDangNhap = ""),
-        (this.form.thucLanh=""),
         (this.form.maNhanVien=0),
         (this.form.matKhau = "");
     },

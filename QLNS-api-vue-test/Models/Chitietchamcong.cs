@@ -10,7 +10,7 @@ namespace QLNS_api_vue_test.Models
         public DateTime? GioBatDau { get; set; }
         public DateTime? GioKetThuc { get; set; }
         public string Status { get; set; }
-        public string TinhLuong { get; set; }
+        public string FirstSalary { get; set; }
 
         public virtual Chamcong DayNavigation { get; set; }
         public virtual Nhanvien MaNhanVienNavigation { get; set; }

@@ -20,9 +20,11 @@ namespace QLNS_api_vue_test.Controllers
                 var nhanviens = from nv in db.Nhanvien
                                 join pb in db.Phongban
                                 on nv.MaPhongBan equals pb.MaPhongBan
-                                select new {nv.MaNhanVien,
-                                            nv.HoTen,
-                                nv.GioiTinh,
+                                select new
+                                {
+                                    nv.MaNhanVien,
+                                    nv.HoTen,
+                                    nv.GioiTinh,
                                     nv.SoCmnd,
                                     nv.NgaySinh,
                                     nv.NoiSinh,
@@ -33,7 +35,7 @@ namespace QLNS_api_vue_test.Controllers
                                     nv.MaChucVu,
                                     nv.TenDangNhap,
                                     nv.MatKhau,
-                                    nv.ThucLanh};
+                                };
                 return Ok(nhanviens);
             }
             catch
@@ -94,7 +96,7 @@ namespace QLNS_api_vue_test.Controllers
                 var GetSingle = from nv in db.Nhanvien
                                 join pb in db.Phongban
                                 on nv.MaPhongBan equals pb.MaPhongBan
-                                where singlenv.MaNhanVien == nv.MaNhanVien 
+                                where singlenv.MaNhanVien == nv.MaNhanVien
                                 select new
                                 {
                                     nv.HoTen,
@@ -105,7 +107,6 @@ namespace QLNS_api_vue_test.Controllers
                                     pb.TenPhongBan,
                                     nv.TenDangNhap,
                                     nv.MatKhau,
-                                    nv.ThucLanh
                                 };
 
                 return Ok(GetSingle);
@@ -115,7 +116,7 @@ namespace QLNS_api_vue_test.Controllers
                 return BadRequest();
             }
         }
-       
+
         [HttpPost("CreateDeparment")] /* tạo phòng ban */
         public async Task<IActionResult> CreateDeparment([FromBody] Phongban phongban)
         {
@@ -132,7 +133,7 @@ namespace QLNS_api_vue_test.Controllers
             }
         }
         //*************************************PUT**************************************
-        
+
         [HttpPut("update")] /*  nhân viên */
         public async Task<IActionResult> Update([FromBody] Nhanvien nhanvien)
         {
@@ -149,7 +150,7 @@ namespace QLNS_api_vue_test.Controllers
                 return BadRequest();
             }
         }
-        
+
         [HttpPut("UpdateDeparment")] /*  phòng ban */
         public async Task<IActionResult> UpdateDeparment([FromBody] Phongban phongban)
         {
