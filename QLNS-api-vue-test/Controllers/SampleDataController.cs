@@ -20,6 +20,8 @@ namespace QLNS_api_vue_test.Controllers
                 var nhanviens = from nv in db.Nhanvien
                                 join pb in db.Phongban
                                 on nv.MaPhongBan equals pb.MaPhongBan
+                                join cv in db.Chucvu
+                                on nv.MaChucVu equals cv.MaChucVu
                                 select new
                                 {
                                     nv.MaNhanVien,
@@ -35,6 +37,7 @@ namespace QLNS_api_vue_test.Controllers
                                     nv.MaChucVu,
                                     nv.TenDangNhap,
                                     nv.MatKhau,
+                                    thucLanh = cv.HeSoLuong * 20 * 8,
                                 };
                 return Ok(nhanviens);
             }

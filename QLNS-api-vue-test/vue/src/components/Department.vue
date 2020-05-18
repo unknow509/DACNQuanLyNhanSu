@@ -47,9 +47,9 @@
             
             <div class="form-group">
               <input
-                v-model="form.TenPhongBan"
+                v-model="form.tenPhongBan"
                 type="text"
-                name="TenPhongBan"
+                name="tenPhongBan"
                 placeholder="Tên phòng ban"
                 class="form-control"
               />
@@ -99,8 +99,8 @@ export default {
       this.editMode = true
       this.showModal = true
       this.tempId=index;
-      this.form.TenPhongBan = name.tenPhongBan
-      this.form.MaPhongBan = name.maPhongBan
+      this.form.tenPhongBan = name.tenPhongBan
+      this.form.maPhongBan = name.maPhongBan
     },
     updateSubmit(event){
       if(event) event.preventDefault();

@@ -21,7 +21,7 @@
                 <th>Department</th>
                 <th>Account</th>
                 <th>PW</th>
-                <!-- <th>Salary($)</th> -->
+                <th>Salary($)</th>
                 <th>Update</th>
                 <th>Delete</th>
               </tr>
@@ -37,7 +37,7 @@
                 <td class="text-center">{{post.tenPhongBan}}</td>
                 <td class="text-center">{{ post.tenDangNhap }}</td>
                 <td  class="text-center">{{ post.matKhau }}</td>
-                <!-- <td class="text-center">{{ post.thucLanh }}</td> -->
+                <td class="text-center">{{ post.thucLanh }}</td>
                 <td>
                   <b-button variant="success" @click="updateEmp(post,index)">Update</b-button>
                 </td>
@@ -239,6 +239,7 @@ export default {
         maChucVu: null,
         tenDangNhap: null,
         matKhau: null,
+        thucLanh:null,
         tenPhongBan:null
       }
     };

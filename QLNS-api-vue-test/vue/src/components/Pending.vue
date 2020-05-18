@@ -61,8 +61,8 @@
                 class="form-control"
               >
                 <option selected disabled>Pending</option>
-                <option value="Acecpt">Acecpt</option>
-                <option value="Delete">Delet</option>
+                <option value="Acecpt">Accept</option>
+                <option value="Delete">Delete</option>
               </select>
              
             </div>
