@@ -1,5 +1,5 @@
 !<template>
-  <div style="color:aliceblue">
+  <div id="checkin-compo" style="color:aliceblue">
     <h1 class="checkin-table-header">timesheets</h1>
     <b-form class="form-group">
       <div class="box">
@@ -141,6 +141,13 @@ export default {
 
 
 <style scoped>
+#checkin-compo{
+  background-image: url("../assets/bg.png");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+}
 .checkin-table-header {
   font-size: xx-large;
   text-transform: uppercase;

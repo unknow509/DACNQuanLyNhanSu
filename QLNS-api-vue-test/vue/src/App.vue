@@ -28,12 +28,12 @@ export default {
 #app {
   font-family: "Montserrat", sans-serif;
   background-image: url("./assets/bg.png");
+   background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
 }
-html {
-  background-image: url("./assets/bg.png");
-  background-size: cover;
-}
+
 #nav-menu ul li a {
   color: #f0f8ff;
   font-size: larger;
