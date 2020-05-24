@@ -53,7 +53,6 @@ export default {
         GioBatDau: null,
         GioKetThuc: null,
         Status: null,
-        TinhLuong:'No'
       }
     };
   },
@@ -142,10 +141,7 @@ export default {
 
 <style scoped>
 #checkin-compo{
-  background-image: url("../assets/bg.png");
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
+
   height: 600px;
 }
 .checkin-table-header {

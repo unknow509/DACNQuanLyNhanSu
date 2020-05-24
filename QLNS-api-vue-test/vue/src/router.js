@@ -6,6 +6,7 @@ import Login from './components/Login.vue'
 import CheckIn from './components/CheckIn.vue'
 import Pending from './components/Pending.vue'
 import HomeEmp from './components/HomeEmp.vue'
+import PersonalInfo from './components/PersonalInfo.vue'
 
 Vue.use(Router)
 
@@ -42,6 +43,12 @@ export default new Router({
     name: 'homeemp',
     component: HomeEmp
   },
+  {
+    path:'/personalinfo',
+    name: 'personalinfo',
+    component: PersonalInfo
+  },
+  
   
     ],
      mode: 'history'

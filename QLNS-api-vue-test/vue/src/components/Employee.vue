@@ -138,17 +138,6 @@
                 maxlength="10"
               />
             </div>
-                  <!-- <div class="form-group">
-              <input
-                v-model="form.maPhongBan"
-                type="number"
-                name="MaPhongBan"
-                placeholder="Mã phòng ban"
-                class="form-control"
-                max="4"
-                min="1"
-              />
-            </div> -->
                <div class="form-group">
                  <select  placeholder="Phòng ban" class="form-control" v-model="form.maPhongBan" name="maPhongBan" id="maPhongBan">
                    <option value disabled>chọn phòng ban</option>
