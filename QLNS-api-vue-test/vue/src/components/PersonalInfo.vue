@@ -35,15 +35,15 @@
         <label for="CMND">Identity</label>
       </b-col>
       <b-col sm="9">
-        <b-form-input  v-model="form.soCmnd" type="text"></b-form-input>
+        <b-form-input maxlength="10" v-model="form.soCmnd" type="text"></b-form-input>
       </b-col>
     </b-row>
     <b-row class="my-3">
       <b-col sm="3">
-        <label for="ngày sinh">DOB</label>
+        <label for="ngày sinh">DOB<span style="opacity:0.5">(dd/mm/yyyy)</span></label>
       </b-col>
       <b-col sm="9">
-        <b-form-input  v-model="form.ngaySinh" type="text"></b-form-input>
+        <b-form-input v-model="dateNgaySinh" type="text"></b-form-input>
       </b-col>
     </b-row>
     <b-row class="my-3">
@@ -85,6 +85,7 @@
 export default {
 data(){
   return {
+    dateNgaySinh:null,
     form: {
         maNhanVien: 0,
         hoTen: null,
@@ -104,10 +105,8 @@ data(){
     
 },
 methods:{
-
-},
-mounted(){
-  (this.form.maNhanVien=this.$store.state.userInfo.maNhanVien),
+  fillInForm(){
+(this.form.maNhanVien=this.$store.state.userInfo.maNhanVien),
   (this.form.hoTen=this.$store.state.userInfo.hoTen),
   (this.form.gioiTinh=this.$store.state.userInfo.gioiTinh),
   (this.form.soCmnd=this.$store.state.userInfo.soCmnd),
@@ -120,7 +119,27 @@ mounted(){
   (this.form.matKhau=this.$store.state.userInfo.matKhau),
   (this.form.thucLanh=this.$store.state.userInfo.thucLanh),
   (this.form.maNhanVien=this.$store.state.userInfo.maNhanVien);
+  },
+
+  getDate(){
+    this.dateNgaySinh = new Date();
+   // console.log('tạo date',this.dateNgaySinh);  
+    this.dateNgaySinh= this.$store.state.userInfo.ngaySinh;
+   // console.log('lấy trên store về đổ vào',this.dateNgaySinh); 
+    this.dateNgaySinh=this.$options.filters.formatDate(this.dateNgaySinh);
+    //console.log('format date',this.dateNgaySinh); 
+  },
+  fillDateInForm(){
+    this.form.ngaySinh = this.$options.filters.formatDay(this.dateNgaySinh);
+  }
 },
+mounted(){
+  this.fillInForm();
+  this.getDate();
+},
+updated(){
+  this.fillDateInForm();
+}
 }
 </script>
 
@@ -136,6 +155,9 @@ mounted(){
   width: 40em;
   background-color: white;
   border-radius: 10%;
+}
+label{
+  padding-top:6px;
 }
 .info-compo-h2{
   font-size: 14px;
