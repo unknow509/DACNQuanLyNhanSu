@@ -1,7 +1,6 @@
 ﻿<template>
-  <div >
-    
-      <b-col md="2" offset-md="10">
+  <div class="emp-compo"> 
+      <b-col md="2" offset-md="10" >
         <b-button @click="createEmp" variant="outline-info">Create employee</b-button>
       </b-col>
     
@@ -375,8 +374,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.emp-compo{
+ font-family: "Montserrat", sans-serif;
+  background-image: url("/src/assets/bg.png"); 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  top: 66px;
+  left: 0px;
 
-
+}
 td{
   text-align: left;
 }

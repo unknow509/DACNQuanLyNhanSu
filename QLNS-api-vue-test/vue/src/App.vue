@@ -28,10 +28,11 @@ export default {
 #app {
   font-family: "Montserrat", sans-serif;
   background-image: url("./assets/bg.png");
-   background-attachment: fixed;
+  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  height: 90,9vh !important;
 }
 
 #nav-menu ul li a {

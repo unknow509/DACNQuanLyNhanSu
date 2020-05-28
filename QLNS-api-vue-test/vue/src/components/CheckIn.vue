@@ -13,7 +13,7 @@
       </div>
       <div class="box">
         <label for>Hours work</label>
-        <input type="number" class="timesheets-input" min="0" max="8" v-model="NumberOfHourEnd" />
+        <input maxlength="1" type="number" class="timesheets-input" min="0" max="8" v-model="NumberOfHourEnd" />
       </div>
       <div class="box">
         <label for>Status</label>
@@ -141,7 +141,6 @@ export default {
 
 <style scoped>
 #checkin-compo{
-
   height: 600px;
 }
 .checkin-table-header {

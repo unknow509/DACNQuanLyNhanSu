@@ -72,7 +72,7 @@
     </b-row>
     
     <div class="text-center">
-     <b-btn class="my-3 info-compo-btn">cập nhật</b-btn> 
+     <b-btn @click="btnSubmit($event)" class="my-3 info-compo-btn">cập nhật</b-btn> 
     </div>  
       </b-col>  
   </b-container>
@@ -116,6 +116,7 @@ methods:{
   (this.form.dienThoai=this.$store.state.userInfo.dienThoai),
   (this.form.maChucVu=this.$store.state.userInfo.maChucVu),
   (this.form.tenDangNhap=this.$store.state.userInfo.tenDangNhap),
+  (this.form.maPhongBan=this.$store.state.userInfo.maPhongBan),
   (this.form.matKhau=this.$store.state.userInfo.matKhau),
   (this.form.thucLanh=this.$store.state.userInfo.thucLanh),
   (this.form.maNhanVien=this.$store.state.userInfo.maNhanVien);
@@ -131,7 +132,31 @@ methods:{
   },
   fillDateInForm(){
     this.form.ngaySinh = this.$options.filters.formatDay(this.dateNgaySinh);
-  }
+  },
+  btnSubmit(event){
+    if(event) event.preventDefault();
+      swalWithBootstrapButtons
+        .fire({
+          title: "Are you sure?",
+          text: "Anything to update ?",
+          icon: "warning",
+          showCancelButton: true,
+           cancelButtonText: "No, cancel!",
+          confirmButtonText: "Yes, update it!",
+          reverseButtons: false
+        })
+        .then(result => {
+          if (result.value) {
+            axios.put('/api/SampleData/update', this.form).then(() => {
+              swalWithBootstrapButtons.fire(
+                "Done!",
+                "Updated success.",
+                "success"
+              ); 
+            });
+          }
+        });    
+    },
 },
 mounted(){
   this.fillInForm();

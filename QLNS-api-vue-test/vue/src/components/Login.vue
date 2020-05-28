@@ -8,6 +8,7 @@
       <div class="inset">
         <p>
           <input
+          maxlength="15"
             type="text"
             name="TenDangNhap"
             v-model="login.username"
@@ -19,9 +20,11 @@
           <input
             type="password"
             name="MatKhau"
+            minlength="6"
+            maxlength="15"
             v-model="login.password"
             id="MatKhau"
-            placeholder="Access code"
+            placeholder="Password (6-20 characters)"
           />
         </p>
         <div style="text-align: center;">
