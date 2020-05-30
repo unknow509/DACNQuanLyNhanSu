@@ -3,53 +3,23 @@
       <b-col md="2" offset-md="10" >
         <b-button @click="createEmp" variant="outline-info">Create employee</b-button>
       </b-col>
-    
     <br />
-    
       <b-col md="12">
         <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>DOB</th>
-                <th>Department</th>
-                <th>Account</th>
-                <th>PW</th>
-                <th>Salary($)</th>
-                <th>Update</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(post, index) in posts" :key="post.maNhanVien">
-                <td>{{ index+1 }}</td>
-                <td>{{ post.hoTen }}</td>
-                <td>{{post.gioiTinh}}</td>
-                <td>{{ post.dienThoai }}</td>
-                <td >{{ post.hoKhau }}</td>
-                <td>{{ post.ngaySinh | formatDate }}</td>
-                <td class="text-center">{{post.tenPhongBan}}</td>
-                <td class="text-center">{{ post.tenDangNhap }}</td>
-                <td  class="text-center">{{ post.matKhau }}</td>
-                <td class="text-center">{{ post.thucLanh }}</td>
-                <td>
-                  <b-button variant="success" @click="updateEmp(post,index)">Update</b-button>
-                </td>
-                <td>
-                  <b-button variant="danger" @click="deleteEmp(post.maNhanVien,index)">Delete</b-button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+           <b-table striped hover :items="posts" :fields="postFields">
+             <template v-slot:cell(ngaySinh)="data"> 
+                 {{ data.item.ngaySinh | formatDate }}
+             </template>
+             <template v-slot:cell(actionUpdate)="data"> 
+                  <b-button variant="success" @click="updateEmp(data.item)">Update</b-button>
+             </template> 
+                    <template v-slot:cell(actionDelete)="data"> 
+                  <b-button variant="danger" @click="deleteEmp(data.item.maNhanVien)">Delete</b-button>
+             </template>
+           </b-table>
+          
         </div>
       </b-col>
-   
-
     <!-------------------------------------------- Modal Start -------------------------------->
     <div>
       <b-modal
@@ -89,13 +59,18 @@
               />
             </div>
             <div class="form-group">
-              <input
+              <!-- <input
                 v-model="form.gioiTinh"
                 type="text"
                 name="GioiTinh"
                 placeholder="Giới tính"
                 class="form-control"
-              />
+              /> -->
+              <b-form-select v-model="form.gioiTinh" name="gioiTinh" >
+                 <option disabled value="">Giới tính</option>
+                <option value="nam">Nam</option>
+                <option value="nu">Nữ</option>
+              </b-form-select>
             </div>
             <div class="form-group">
               <input
@@ -175,7 +150,7 @@
             <div class="form-group">
               <input
                 v-model="form.matKhau"
-                type="text"
+                type="password"
                 name="MatKhau"
                 placeholder="Mật khẩu"
                 class="form-control"
@@ -218,9 +193,61 @@ export default {
   data() {
     return {
       posts: [],
+      postFields:[
+        {
+          key:'hoTen',
+        label:'Name',
+        sortable:true
+        },
+        {
+          key:'gioiTinh',
+        label:'Gender',
+        sortable:true
+        },
+        {
+          key:'dienThoai',
+        label:'Phone',
+        sortable:false
+        },
+        {
+          key:'hoKhau',
+        label:'Address',
+        sortable:false
+        },
+        {
+          key:'ngaySinh',
+        label:'DOB',
+        sortable:true
+        },
+        {
+          key:'tenPhongBan',
+        label:'Department',
+        sortable:true
+        },
+        {
+          key:'tenDangNhap',
+        label:'Account',
+        sortable:false
+        },
+        {
+          key:'thucLanh',
+        label:'Salary$',
+        sortable:true
+        },
+        {
+          key:'actionUpdate',
+        label:'Update',
+        sortable:false
+        },
+        {
+          key:'actionDelete',
+        label:'Delete',
+        sortable:false
+        },
+        
+      ],
       originPosts:[],
-      positionId: [],
-      tempId:null,
+      positionId: [],   
       showModal: false,
       editMode: true,
       deleteMode: false,
@@ -272,11 +299,10 @@ export default {
       this.showModal = true;
       this.resetForm();
     },
-
-    updateEmp(nhanvien,index) {
+    updateEmp(nhanvien) {
       this.editMode = true;
       this.showModal = true;
-      this.tempId=index;
+   
       (this.form.maNhanVien = nhanvien.maNhanVien),
         (this.form.hoTen = nhanvien.hoTen),
         (this.form.gioiTinh = nhanvien.gioiTinh),
@@ -297,16 +323,23 @@ export default {
       axios.put("/api/SampleData/update", this.form).then(res => {
         this.$bvModal.hide('modalFormAdmin')
         //console.log(res)
-        // this.posts[this.tempId]=this.form;  //cách 1
-         this.posts[this.tempId]=res.data;
-         this.posts[this.tempId].tenPhongBan=this.form.tenPhongBan;
+        const {data} =res;
+        const post = this.posts.find(post=>post.maNhanVien==data.maNhanVien);
+        //console.log(post);
+        post.hoTen = data.hoTen;
+        post.gioiTinh = data.gioiTinh;
+        post.ngaySinh = data.ngaySinh;
+        post.dienThoai = data.dienThoai;
+        post.hoKhau = data.hoKhau;
+        post.tenPhongBan = data.tenPhongBan;
+        post.tenDangNhap = data.tenDangNhap;
+        post.thucLanh = data.thucLanh;
          this.resetForm();
-          //cách 2
+         
       });
     },
-    deleteEmp(id,index) {
+    deleteEmp(id) {
       //console.log(id);
-      this.tempId=index;
       swalWithBootstrapButtons
         .fire({
           title: "Are you sure?",
@@ -325,7 +358,7 @@ export default {
                 "Your file has been deleted.",
                 "success"
               );
-              this.posts.splice(this.tempId, 1);   
+              this.posts = this.posts.filter(post => post.maNhanVien !=id);   
             });
           }
           //  
@@ -337,7 +370,7 @@ export default {
       axios
         .post("http://localhost:61447/api/SampleData/create", this.form)
         .then(response => {
-         // console.log(response);
+          //console.log(response);
           this.$bvModal.hide('modalFormAdmin');                   
           this.posts.push(response.data[0]);
         })
@@ -363,7 +396,7 @@ export default {
       .then(function(res) {
         this.posts = res.body;
         this.originPosts= res.body;
-        //console.log(res);
+        console.log(res);
       })
       .catch(function(err) {
         console.log("Error: ", err);
