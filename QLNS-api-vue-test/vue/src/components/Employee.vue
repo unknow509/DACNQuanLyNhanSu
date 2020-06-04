@@ -6,7 +6,7 @@
     <br />
       <b-col md="12">
         <div class="table-responsive">
-           <b-table striped hover :items="posts" :fields="postFields">
+           <b-table id="table" striped hover :items="posts" :fields="postFields" :per-page="perPage" :current-page="currentPage">
              <template v-slot:cell(ngaySinh)="data"> 
                  {{ data.item.ngaySinh | formatDate }}
              </template>
@@ -17,7 +17,21 @@
                   <b-button variant="danger" @click="deleteEmp(data.item.maNhanVien)">Delete</b-button>
              </template>
            </b-table>
-          
+           <b-pagination
+                class="paging"
+                v-model="currentPage"
+                :per-page="perPage"
+                :total-rows="rows"
+              >
+                <template v-slot:first-text><span class="text-success">First</span></template>
+                <template v-slot:prev-text><span class="text-danger">Prev</span></template>
+                <template v-slot:next-text><span class="text-warning">Next</span></template>
+                <template v-slot:last-text><span class="text-info">Last</span></template>              
+                <template v-slot:page="{ page, active }">
+                  <b v-if="active">{{ page }}</b>
+                  <i v-else>{{ page }}</i>
+                </template>
+            </b-pagination>        
         </div>
       </b-col>
     <!-------------------------------------------- Modal Start -------------------------------->
@@ -32,8 +46,8 @@
       >
         <!----------------------------------------------- Modal Header ------------------------------------->
         <div class="modal-header">
-          <h4 v-show="!editMode" class="modal-title text-center">Tạo mới</h4>
-          <h4 v-show="editMode" class="modal-title">Sửa</h4>
+          <h4 v-show="!editMode" class="modal-title text-center">CREATE</h4>
+          <h4 v-show="editMode" class="modal-title">MODIFY</h4>
         </div>
         <form>
           <!-------------------------------------------- Modal body ------------------------------>
@@ -192,6 +206,8 @@
 export default {
   data() {
     return {
+      currentPage:1,
+      perPage: 7,
       posts: [],
       postFields:[
         {
@@ -268,6 +284,12 @@ export default {
         tenPhongBan:null
       }
     };
+  },
+  computed:{
+    rows(){
+      return  this.posts.length
+    },
+
   },
   methods: {
     resetForm() {
@@ -396,7 +418,7 @@ export default {
       .then(function(res) {
         this.posts = res.body;
         this.originPosts= res.body;
-        console.log(res);
+        // console.log(res);
       })
       .catch(function(err) {
         console.log("Error: ", err);
@@ -414,7 +436,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100%;
+  min-height: 91%;
   min-width: 100%;
   position: absolute;
   top: 66px;
@@ -436,5 +458,9 @@ button.swal2-cancel.btn.btn-danger {
 .modal{
   width: 60%;
 }
-
+.paging{
+      position: absolute;
+    top: 32em;
+    left: 37em;
+}
 </style>

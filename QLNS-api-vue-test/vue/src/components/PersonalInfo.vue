@@ -16,7 +16,7 @@
         <label for="Họ Tên">Name</label>
       </b-col>
       <b-col sm="9">
-        <b-form-input  v-model="form.hoTen" type="text"></b-form-input>
+        <b-form-input maxlength="20"  v-model="form.hoTen" type="text"></b-form-input>
       </b-col>
     </b-row>
     <b-row class="my-3">
@@ -51,7 +51,7 @@
         <label for="hoKhau">Adress</label>
       </b-col>
       <b-col sm="9">
-        <b-form-input  v-model="form.hoKhau" type="text"></b-form-input>
+        <b-form-input maxlength="40" v-model="form.hoKhau" type="text"></b-form-input>
       </b-col>
     </b-row>
     <b-row class="my-3">
@@ -59,7 +59,7 @@
         <label for="nơi sinh">Place</label>
       </b-col>
       <b-col sm="9">
-        <b-form-input  v-model="form.noiSinh" type="text"></b-form-input>
+        <b-form-input maxlength="40"  v-model="form.noiSinh" type="text"></b-form-input>
       </b-col>
     </b-row>
     <b-row class="my-3">
@@ -67,7 +67,7 @@
         <label for="dienThoai">Phone</label>
       </b-col>
       <b-col sm="9">
-        <b-form-input v-model="form.dienThoai" type="text"></b-form-input>
+        <b-form-input maxlength="10" v-model="form.dienThoai" type="text"></b-form-input>
       </b-col>
     </b-row>
     
