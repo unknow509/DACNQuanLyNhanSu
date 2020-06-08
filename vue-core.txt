@@ -1,0 +1,149 @@
+				
+
+*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*DATABASE*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-*	
+					khi nhập liệu char sẽ tự động điền khoảng trắng
+					còn varchar sẽ ko điền
+					nvarchar là dùng unicode
+
+*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-input existing database in asp.netcore*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-*
+
+					install Microsoft.EntityFrameworkCore.SqlServer
+
+					Scaffold-DbContext "Server=DESKTOP-08CCL2K;Database=DACNQuanLyNhanSu;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+					muốn update database thì xóa thư mục models, comment các dòng lỗi rồi chạy lại dòng trên trong conosle
+
+*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-get Vue in asp.net core-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*
+					run npm at file chứa vue (trong asp.net core), (npm run serve)
+					tạo project asp.netcore + react, 
+					delete file appClient
+					đưa file vue vào asp.netcore
+					cài vueclimiddleware 2.1.1
+
+					vào startup.cs thêm :
+
+					using VueCliMiddleware;
+
+					 services.AddSpaStaticFiles(configuration =>
+								{
+									configuration.RootPath = "vue-skills";
+								});
+
+					app.UseSpa(spa =>
+								{
+									spa.Options.SourcePath = "vue-skills";  ------------------------- (tên file vue)
+
+									if (env.IsDevelopment())
+									{
+										spa.UseVueCli(npmScript: "serve");
+									}
+								});		
+
+*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-IMG IN .NET CORE*-*-*-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-*	
+
+
+
+						<img src="img_avatar2.png" alt="img" />
+
+						ko cần ../ từ ngoài vào	bất kể đang đứng ở đâu
+						
+*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*--*-*-*-*-*-*ĐƯỜNG LINK KO CÓ THÔNG TIN*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-
+								vào router.js
+								dưới mảng các router dùng : 	mode: 'history'
+	
+	
+	
+*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**--*-*-*-*-*-*FORM-LOGIN*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-*
+			
+
+			dùng phương thức post 
+				tạo 2 biến để chứa dữ liệu tài khoản mật khẩu từ database 
+				public IQueryable<Nhanvien> Login(string username,string password)    ===>		IQueryable<Nhanvien>   khai báo kiểu nhân viên để query database thì dùng iqueyable
+				sau đó trả về các nhân viên trong dữ liệu đã query
+				bên front-end tại app.vue tạo 1 method để check localStore,secssion hoặc cookie
+				nếu có rồi thì bay qua trang chủ, chưa thi bay wa trang login
+											methods: {
+										checkLogin() {
+											let localStored = JSON.parse(localStorage.getItem('user_loggedin'))
+											if(localStored != null){
+												this.$router.push('/').catch(err => {})
+											}else {
+												this.$router.push('/login').catch(err => {})
+											}
+											console.log('Run Checklogin')
+										}
+									},
+									mounted() {
+										this.checkLogin();
+									}
+				bên trang login, tạo 1 localStore rồi gọi lại hàm checkLogin()
+
+ hàm login and logout phải nằm ở trang layout, vì trang nào cũng phải có nút logout
+ 
+ *-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-C# code login*-*-*-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*
+ 
+			phải tạo 1 class model rồi đẩy class model xuống database
+ 
+				 public class LoginNhanVien
+    {
+        public string username { get; set; }
+        public string password { get; set; }
+    }
+ 
+ 
+  [HttpPost("login")]
+        public Nhanvien Login([FromBody] LoginNhanVien nhanvien)
+        {
+
+            return db.Nhanvien.FirstOrDefault(t => t.TenDangNhap == nhanvien.username && t.MatKhau == nhanvien.password);
+
+
+        }
+ 
+-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*DISPLAY DATE*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-
+
+									 cài npm vào source.
+									 
+									npm install moment --save 
+
+														import vào file main.js
+															import moment from 'moment'
+
+															Vue.filter('formatDate', function(value) {
+															  if (value) {
+																return moment(String(value)).format('MM/DD/YYYY hh:mm')
+															  }
+															})
+				
+				
+										USING ===> 		<td>{{ post.ngaySinh | formatDate }}</td>
+										
+-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*--*-*-*-*--*-*-*-*-*-*-*-*-*-*CHUYỂN SANG ROUTER KHÁC*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-
+										
+										
+										this.$router.push('/formtext').catch(err => {})
+										
+-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*--*-*-*-*--*-*-*-*-*-*-*-*-*-*DATABASE*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-
+
+					KHI GIÁ TRỊ LÀ CỐ ĐỊNH DATA, THÌ PHẢI CHO SELECT OPTION
+					
+-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*--*-*-*-*--*-*-*-*-*-*-*-*-*-*cài lại tất cả package định nghĩa trong package.json*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-
+											NPM INSTALL
+											
+-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*--*-*-*-*--*-*-*-*-*-*-*-*-*-*INPUT FORM, CHECKBOX*-*-*-*-*-*-*-*-*-*-*-*-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-*-*-**-*-*-*--*-*-*-*-
+			
+											TẤT CẢ ID, NAME CÁC PROPS PHẢI KHÁC NHAU KO ĐƯỢC TRÙNG
+											<b-form-checkbox
+              :id="'id'+index"
+              :name="'id'+index"
+              v-model="selected"                 
+              :value="field"
+              class="ml-4">           
+              </b-form-checkbox> 
+											
+											
+											
+											
+											
+											
+											

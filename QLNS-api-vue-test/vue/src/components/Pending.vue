@@ -33,8 +33,8 @@
           <td>
             <b-button @click="UpdateChiTietChamCong(field,index)" variant="success">Check</b-button>  
             <b-form-checkbox
-              id="fields"  
-              name="fields"
+              :id="'id'+index"
+              :name="'id'+index"
               v-model="selected"                 
               :value="field"
               class="ml-4">           
