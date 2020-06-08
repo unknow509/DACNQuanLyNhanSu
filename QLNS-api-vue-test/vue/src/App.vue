@@ -36,7 +36,7 @@ export default {
 }
 
 #nav-menu ul li a {
-  color: #f0f8ff;
+  color: aliceblue;
   font-size: larger;
   text-transform: uppercase;
 }
@@ -49,7 +49,11 @@ export default {
 }
 th,
 td {
-  color: aliceblue;
+  color: #fff;
+ 
+}
+thead{
+   background: #243e59;
 }
 button.swal2-cancel.btn.btn-danger {
     margin-left: 2.3rem;

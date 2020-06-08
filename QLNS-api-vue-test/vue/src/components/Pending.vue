@@ -8,6 +8,19 @@
           <th>Giờ kết thúc</th>
           <th>Ngày</th>
           <th>Status</th>
+          <th >            
+              <b-form-checkbox            
+                  size="lg"
+                  v-model="allSelected"
+                  :indeterminate="indeterminate"
+                  aria-describedby="fields"
+                  aria-controls="fields"
+                  @change="toggleAll"
+                >
+                Check-All              
+               <b-button variant="outline-success"><b-icon icon="check2"/></b-button>
+                </b-form-checkbox>
+          </th>         
         </tr>
       </thead>
       <tbody>
@@ -18,7 +31,15 @@
           <td>{{field.day | formatDate}}</td>
           <td>{{ field.status }}</td>
           <td>
-            <b-button @click="UpdateChiTietChamCong(field,index)" variant="success">Check</b-button>
+            <b-button @click="UpdateChiTietChamCong(field,index)" variant="success">Check</b-button>  
+            <b-form-checkbox
+              id="fields"  
+              name="fields"
+              v-model="selected"                 
+              :value="field"
+              class="ml-4">           
+              </b-form-checkbox>       
+      
           </td>
         </tr>
       </tbody>
@@ -89,6 +110,9 @@
 export default {
   data() {
     return {
+      selected: [],
+      allSelected: false,
+      indeterminate: false,
       fields: [],
       showModal: false,
       form: {
@@ -96,14 +120,12 @@ export default {
         GioBatDau: null,
         GioKetThuc: null,
         Day: null,
-        Status:"pending",
-       
+        Status:"pending",       
       }
     };
   },
   methods: {
     getAllPending() {
-      
       axios
         .get("http://localhost:61447/api/CheckIn/GetAllPending")
         .then(res => {
@@ -131,7 +153,25 @@ export default {
        this.$bvModal.hide('modalFormAdmin')
         this.fields.splice(this.tempId, 1);      
       })
-    }
+    },
+    toggleAll(checked) { 
+        this.selected = checked ? this.fields.slice() : []
+      }
+  },
+  watch:{
+      selected(newVal, oldVal) {
+        if (newVal.length === 0) {
+          this.indeterminate = false
+          this.allSelected = false
+        } 
+        else if (newVal.length === this.fields.length) {
+          this.indeterminate = false
+          this.allSelected = true
+        } else {
+          this.indeterminate = true
+          this.allSelected = false
+        }
+      }  
   },
   mounted() {
     this.getAllPending();
@@ -140,5 +180,20 @@ export default {
 </script>
 
 <style scoped>
+th:last-child {
+    width: 210px;
+}
+tr td:nth-child(6){
+  display: flex;
+  overflow: hidden;
+}
+tr td:nth-child(6) button{
+  margin:3px;
+  
+}
+.ml-4.custom-control.custom-checkbox {
+    position: relative;
+    top: 9px;
+}
 
 </style>

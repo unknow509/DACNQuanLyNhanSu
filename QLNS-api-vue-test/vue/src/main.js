@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import router from './router'
 import jquery from 'jquery'
-import BootstrapVue from 'bootstrap-vue'
+import {BootstrapVue ,  BootstrapVueIcons} from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import axios from 'axios'
@@ -15,6 +15,7 @@ window.$ = jquery;
 window.EventBus = new Vue()
 //=======================
 Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
 Vue.use(router)
 window.axios = axios
 Vue.use(VueResource)

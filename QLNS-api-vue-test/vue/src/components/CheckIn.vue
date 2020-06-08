@@ -44,6 +44,7 @@ export default {
   name: "CheckIn",
   data() {
     return {
+     
       ShowStatus: false,
       dateNow: null,
       NumberOfHourEnd: null,

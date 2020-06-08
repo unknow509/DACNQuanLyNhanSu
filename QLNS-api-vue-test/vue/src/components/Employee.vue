@@ -3,7 +3,6 @@
       <b-col md="2" offset-md="10" >
         <b-button @click="createEmp" variant="outline-info">Create employee</b-button>
       </b-col>
-    <br />
       <b-col md="12">
         <div class="table-responsive">
            <b-table id="table" striped hover :items="posts" :fields="postFields" :per-page="perPage" :current-page="currentPage">
@@ -185,8 +184,10 @@
           </div>
           <!--------------------------------------------Modal footer ---------------------------->
           <div class="modal-footer">
-            <button v-show="!editMode" @click="createbtn($event)" type="submit" class="btn btn-primary">Tạo</button>
-            <button v-show="editMode" @click="updateSubmit($event)" type="submit" class="btn btn-success">Sửa</button>
+            
+            <b-button @click="resetForm" variant="warning">Reset</b-button>
+            <button v-show="!editMode" @click="createbtn($event)" type="submit" class="btn btn-primary">Create</button>
+            <button v-show="editMode" @click="updateSubmit($event)" type="submit" class="btn btn-success">Modify</button>
             <button
               type="button"
               class="btn btn-danger"
@@ -287,7 +288,7 @@ export default {
   },
   computed:{
     rows(){
-      return  this.posts.length
+      return this.posts.length
     },
 
   },
@@ -356,8 +357,7 @@ export default {
         post.tenPhongBan = data.tenPhongBan;
         post.tenDangNhap = data.tenDangNhap;
         post.thucLanh = data.thucLanh;
-         this.resetForm();
-         
+         this.resetForm();         
       });
     },
     deleteEmp(id) {
@@ -383,10 +383,8 @@ export default {
               this.posts = this.posts.filter(post => post.maNhanVien !=id);   
             });
           }
-          //  
         });
     },
-    //
     createbtn(event) {
       if(event) event.preventDefault();
       axios
@@ -441,7 +439,6 @@ export default {
   position: absolute;
   top: 66px;
   left: 0px;
-
 }
 td{
   text-align: left;
@@ -462,5 +459,8 @@ button.swal2-cancel.btn.btn-danger {
       position: absolute;
     top: 32em;
     left: 37em;
+}
+.modal-footer button:first-child {
+    margin-right: 14em;
 }
 </style>
