@@ -1,7 +1,7 @@
 ﻿<template>
   <div class="emp-compo"> 
       <b-col md="2" offset-md="10" >
-        <b-button @click="createEmp" variant="outline-info">Create employee</b-button>
+        <b-button @click="createEmp" variant="outline-info"><b-icon icon="person-plus"></b-icon>Create employee</b-button>
       </b-col>
       <b-col md="12">
         <div class="table-responsive">
@@ -10,10 +10,10 @@
                  {{ data.item.ngaySinh | formatDate }}
              </template>
              <template v-slot:cell(actionUpdate)="data"> 
-                  <b-button variant="success" @click="updateEmp(data.item)">Update</b-button>
+                  <b-button variant="success" @click="updateEmp(data.item)"><b-icon icon="pencil"></b-icon>Update</b-button>
              </template> 
                     <template v-slot:cell(actionDelete)="data"> 
-                  <b-button variant="danger" @click="deleteEmp(data.item.maNhanVien)">Delete</b-button>
+                  <b-button variant="danger" @click="deleteEmp(data.item.maNhanVien)"><b-icon icon="x-circle"></b-icon>Delete</b-button>
              </template>
            </b-table>
            <b-pagination

@@ -72,7 +72,7 @@
     </b-row>
     
     <div class="text-center">
-     <b-btn @click="btnSubmit($event)" class="my-3 info-compo-btn">cập nhật</b-btn> 
+     <b-btn @click="btnSubmit($event)" class="my-3 info-compo-btn"> <b-icon icon="cloud-upload" aria-hidden="true"></b-icon> Save</b-btn> 
     </div>  
       </b-col>  
   </b-container>

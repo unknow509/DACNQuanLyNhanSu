@@ -3,15 +3,14 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Họ Tên</th>
-          <th>Giờ bắt đầu</th>
-          <th>Giờ kết thúc</th>
-          <th>Ngày</th>
+          <th>Name</th>
+          <th>Time start</th>
+          <th>Time end</th>
+          <th>Day</th>
           <th>Status</th>
           <th >            
               <b-form-checkbox           
                   size="lg"
-                 
                   aria-describedby="fields"
                   aria-controls="fields"
                   @change="toggleAll"
@@ -30,7 +29,7 @@
           <td>{{field.day | formatDate}}</td>
           <td>{{ field.status }}</td>
           <td>
-            <b-button @click="UpdateChiTietChamCong(field,index)" variant="success">Check</b-button>  
+            <b-button @click="UpdateChiTietChamCong(field,index)" variant="success"> <b-icon icon="check"></b-icon>Check</b-button>  
             <b-form-checkbox  
             @change="changeSingleStatus($event,field)"
               size="lg"       
@@ -110,8 +109,7 @@
 export default {
   data() {
     return {
-      selected: [],
-     
+      selected: [],   
       fields: [],
       showModal: false,
       form: {

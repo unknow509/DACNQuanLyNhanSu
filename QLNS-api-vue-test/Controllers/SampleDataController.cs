@@ -35,6 +35,7 @@ namespace QLNS_api_vue_test.Controllers
                                     nv.MaPhongBan,
                                     pb.TenPhongBan,
                                     nv.MaChucVu,
+                                    cv.TenChucVu,
                                     nv.TenDangNhap,
                                     nv.MatKhau,
                                     thucLanh = cv.HeSoLuong * 20 * 8,

@@ -28,7 +28,7 @@
             <b-icon icon="power" aria-hidden="true"></b-icon>Logout
             </b-button>
           <b-form-input type="search" v-model="searchQuery" size="sm" class="mr-sm-2" placeholder="Search for name"></b-form-input>
-          <b-button variant="secondary" size class="my-2 my-sm-0" @click="search" >Search</b-button>
+          <b-button variant="secondary" size class="my-2 my-sm-0" @click="search" ><b-icon icon="search"></b-icon> Search</b-button>
         </b-nav-form>
       </b-navbar-nav>
     </b-navbar>

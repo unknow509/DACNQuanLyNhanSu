@@ -32,7 +32,7 @@
           disabled
         />
         <div class="check">
-          <b-button variant="info" @click.prevent="Submit" class="btn">Submit</b-button>
+          <b-button variant="info" @click.prevent="Submit" class="btn"> <b-icon icon="cloud-upload" aria-hidden="true"></b-icon> Submit</b-button>
         </div>
       </div>
     </b-form>

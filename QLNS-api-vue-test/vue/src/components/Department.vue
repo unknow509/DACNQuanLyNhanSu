@@ -2,7 +2,7 @@
   <div>
     <b-row>
       <b-col md="2" offset-md="10" >
-        <b-button class @click="createDep" variant="outline-info">Create department</b-button>
+        <b-button class @click="createDep" variant="outline-info"><b-icon icon="person-plus"></b-icon>Create department</b-button>
       </b-col>
     </b-row>
     <b-row>
@@ -22,10 +22,10 @@
                 <td>{{ index+1 }}</td>
                 <td>{{ phongban.tenPhongBan }}</td>
                 <td>
-                  <b-button variant="success" @click="updateDep(phongban,index)">Update</b-button>
+                  <b-button variant="success" @click="updateDep(phongban,index)"><b-icon icon="pencil"></b-icon>Update</b-button>
                 </td>
                 <td>
-                  <b-button variant="danger" @click="deleteDep(phongban.maPhongBan,index)">Delete</b-button>
+                  <b-button variant="danger" @click="deleteDep(phongban.maPhongBan,index)"><b-icon icon="x-circle"></b-icon>Delete</b-button>
                 </td>
               </tr>
             </tbody>

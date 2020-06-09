@@ -5,7 +5,7 @@
     </div>
     <form>
       <h1 id="litheader">AECEND</h1>
-      <div class="inset">
+      <div class="inset">       
         <p>
           <input
           maxlength="15"
@@ -14,7 +14,7 @@
             v-model="login.username"
             id="TenDangNhap"
             placeholder="Account"
-          />
+          /> 
         </p>
         <p>
           <input
@@ -36,7 +36,7 @@
         </div>
       </div>
       <p class="p-container">
-        <b-btn class="submit" @click.prevent="LogIn" id="go" value="Authorize">Login</b-btn>
+        <b-btn class="submit" @click.prevent="LogIn" id="go" value="Authorize"> <b-icon icon="forward" scale="1.5"></b-icon> Login</b-btn>
       </p>
     </form>
   </div>
