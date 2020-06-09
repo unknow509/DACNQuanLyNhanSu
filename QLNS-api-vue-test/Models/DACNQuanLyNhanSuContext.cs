@@ -52,10 +52,6 @@ namespace QLNS_api_vue_test.Models
 
                 entity.Property(e => e.Day).HasColumnType("datetime");
 
-                entity.Property(e => e.FirstSalary)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.GioBatDau).HasColumnType("datetime");
 
                 entity.Property(e => e.GioKetThuc).HasColumnType("datetime");
@@ -88,6 +84,10 @@ namespace QLNS_api_vue_test.Models
                     .HasMaxLength(20)
                     .IsUnicode(false)
                     .ValueGeneratedNever();
+
+                entity.Property(e => e.LuongCb)
+                    .HasColumnName("LuongCB")
+                    .HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.TenChucVu).HasMaxLength(50);
             });
@@ -150,6 +150,8 @@ namespace QLNS_api_vue_test.Models
                 entity.Property(e => e.TenDangNhap)
                     .HasMaxLength(30)
                     .IsUnicode(false);
+
+                entity.Property(e => e.ThucLanh).HasColumnType("decimal(18, 2)");
 
                 entity.HasOne(d => d.MaChucVuNavigation)
                     .WithMany(p => p.Nhanvien)

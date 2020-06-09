@@ -156,7 +156,7 @@ methods:{
             });
           }
         });    
-    },
+  },
 },
 mounted(){
   this.fillInForm();

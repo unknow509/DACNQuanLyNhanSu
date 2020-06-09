@@ -23,6 +23,7 @@ namespace QLNS_api_vue_test.Models
         public string MaChucVu { get; set; }
         public string TenDangNhap { get; set; }
         public string MatKhau { get; set; }
+        public decimal? ThucLanh { get; set; }
 
         public virtual Chucvu MaChucVuNavigation { get; set; }
         public virtual Phongban MaPhongBanNavigation { get; set; }

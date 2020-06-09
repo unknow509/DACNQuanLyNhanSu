@@ -10,6 +10,7 @@ import App from './App.vue'
 import moment from 'moment'
 import Swal from 'sweetalert2'
 import {store} from './store/store'
+import lodash from 'lodash'
 //declare global jquery
 window.$ = jquery;
 window.EventBus = new Vue()
@@ -17,6 +18,7 @@ window.EventBus = new Vue()
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 Vue.use(router)
+window._= lodash
 window.axios = axios
 Vue.use(VueResource)
 //Sweet Alert 2

@@ -89,7 +89,23 @@ namespace QLNS_api_vue_test.Controllers
                 return BadRequest();
             }
         }
-
+        [HttpPut("UpdateAll")]
+        public async Task<IActionResult> UpdateAll([FromBody] List<Chitietchamcong> listCtcc)
+        {
+            try
+            {
+                foreach(var ctcc in listCtcc)
+                {
+                db.Entry(ctcc).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                }
+                db.SaveChanges();
+                return Ok(listCtcc);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
         //*************************************DELETE**************************************
     }
 }

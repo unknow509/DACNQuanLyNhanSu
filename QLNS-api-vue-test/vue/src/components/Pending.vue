@@ -9,16 +9,15 @@
           <th>Ngày</th>
           <th>Status</th>
           <th >            
-              <b-form-checkbox            
+              <b-form-checkbox           
                   size="lg"
-                  v-model="allSelected"
-                  :indeterminate="indeterminate"
+                 
                   aria-describedby="fields"
                   aria-controls="fields"
                   @change="toggleAll"
                 >
                 Check-All              
-               <b-button variant="outline-success"><b-icon icon="check2"/></b-button>
+               <b-button @click="submitAllPending($event)" variant="outline-success"><b-icon icon="check2"/></b-button>
                 </b-form-checkbox>
           </th>         
         </tr>
@@ -32,11 +31,12 @@
           <td>{{ field.status }}</td>
           <td>
             <b-button @click="UpdateChiTietChamCong(field,index)" variant="success">Check</b-button>  
-            <b-form-checkbox
+            <b-form-checkbox  
+            @change="changeSingleStatus($event,field)"
+              size="lg"       
               :id="'id'+index"
               :name="'id'+index"
-              v-model="selected"                 
-              :value="field"
+              v-model="field.isChecked"
               class="ml-4">           
               </b-form-checkbox>       
       
@@ -111,8 +111,7 @@ export default {
   data() {
     return {
       selected: [],
-      allSelected: false,
-      indeterminate: false,
+     
       fields: [],
       showModal: false,
       form: {
@@ -129,10 +128,13 @@ export default {
       axios
         .get("http://localhost:61447/api/CheckIn/GetAllPending")
         .then(res => {
+          res.data.map(item=>{
+            return item.isChecked=false
+          })
+          // console.log(res.data)
           this.fields = res.data.sort((a,b)=>{
-        return new Date(b.day).getTime() - new Date(a.day).getTime();
-      })
-          // console.log( this.fields);
+            return new Date(b.day).getTime() - new Date(a.day).getTime();
+          })
         })
         .catch(err => {
           console.log("error get pending", err);
@@ -151,31 +153,55 @@ export default {
       axios.put('http://localhost:61447/api/CheckIn/Update',this.form)
       .then(res=>{
        this.$bvModal.hide('modalFormAdmin')
-        this.fields.splice(this.tempId, 1);      
+      this.fields = this.fields.filter(field => field.maNhanVien != this.form.maNhanVien);  
       })
     },
+    changeSingleStatus(event,field){
+       field.status = event ? 'Accept' : 'Pending'
+    },
     toggleAll(checked) { 
-        this.selected = checked ? this.fields.slice() : []
-      }
+         this.fields.map(item=>{
+           item.isChecked=checked
+           item.status=checked ? 'Accept' : 'Pending'           
+         })
+        //console.log(this.fields.every(item=>item.isChecked===false))
+        //console.log(this.fields.some(item=>item.isChecked===true))
+      },
+    submitAllPending(event){
+      if (event) event.preventDefault()
+      let sendData = _.cloneDeep(this.fields)
+      sendData=sendData.filter(item=>item.isChecked===true)
+      swalWithBootstrapButtons
+        .fire({
+          title: "Are you sure?",
+          text: "Anything to update ?",
+          icon: "warning",
+          showCancelButton: true,
+           cancelButtonText: "No, cancel!",
+          confirmButtonText: "Yes, update it!",
+          reverseButtons: false
+        })
+        .then(result => {
+          if (result.value) {
+            axios.put('/api/CheckIn/UpdateAll',sendData).then(() => {
+              swalWithBootstrapButtons.fire(
+                "Done!",
+                "Check all success.",
+                "success"
+              ); 
+                 this.fields = this.fields.filter(item => item.isChecked===false);  
+            });
+          }
+        });
+    }
   },
   watch:{
-      selected(newVal, oldVal) {
-        if (newVal.length === 0) {
-          this.indeterminate = false
-          this.allSelected = false
-        } 
-        else if (newVal.length === this.fields.length) {
-          this.indeterminate = false
-          this.allSelected = true
-        } else {
-          this.indeterminate = true
-          this.allSelected = false
-        }
-      }  
+     
   },
   mounted() {
     this.getAllPending();
-  }
+  },
+
 };
 </script>
 
