@@ -38,8 +38,8 @@
       <b-modal id="modalFormAdmin" centered title="BootstrapVue" v-model="showModal" hide-footer hide-header>
         <!-- Modal Header -->
         <div class="modal-header" >
-          <h4 v-show="!editMode" class="modal-title">Tạo mới</h4>
-          <h4 v-show="editMode" class="modal-title">Sửa</h4>
+          <h4 v-show="!editMode" class="modal-title">Create</h4>
+          <h4 v-show="editMode" class="modal-title">Modify</h4>
         </div>
         <form>
           <!---------------------------------- Modal body ---------------------------------->
@@ -50,7 +50,7 @@
                 v-model="form.tenPhongBan"
                 type="text"
                 name="tenPhongBan"
-                placeholder="Tên phòng ban"
+                placeholder="Name Department"
                 class="form-control"
               />
             </div>
@@ -58,8 +58,8 @@
           </div>
           <!----------------------------------Modal footer ---------------------------------->
           <div class="modal-footer">
-            <button v-show="!editMode" @click="createSubmit($event)" type="submit" class="btn btn-primary">Tạo</button>
-            <button v-show="editMode" @click="updateSubmit($event)" type="submit" class="btn btn-success">Sửa</button>
+            <button v-show="!editMode" @click="createSubmit($event)" type="submit" class="btn btn-primary">Create</button>
+            <button v-show="editMode" @click="updateSubmit($event)" type="submit" class="btn btn-success">Modify</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal" @click="$bvModal.hide('modalFormAdmin')">Close</button>
           </div>
         </form>

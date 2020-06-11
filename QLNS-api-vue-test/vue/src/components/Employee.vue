@@ -90,7 +90,7 @@
                 v-model="form.ngaySinh"
                 type="text"
                 name="NgaySinh"
-                placeholder="Ngày sinh"
+                placeholder="Ngày sinh (dd/mm/yyyy)"
                 class="form-control"
               />
             </div>
@@ -185,7 +185,7 @@
           <!--------------------------------------------Modal footer ---------------------------->
           <div class="modal-footer">
             
-            <b-button @click="resetForm" variant="warning">Reset</b-button>
+            <b-button v-show="!editMode" @click="resetForm" variant="warning">Reset</b-button>
             <button v-show="!editMode" @click="createbtn($event)" type="submit" class="btn btn-primary">Create</button>
             <button v-show="editMode" @click="updateSubmit($event)" type="submit" class="btn btn-success">Modify</button>
             <button
@@ -241,6 +241,11 @@ export default {
         label:'Department',
         sortable:true
         },
+        // {
+        //   key:'tenChucVu',
+        // label:'Position',
+        // sortable:true
+        // },
         {
           key:'tenDangNhap',
         label:'Account',

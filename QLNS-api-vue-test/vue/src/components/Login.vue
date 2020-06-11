@@ -3,29 +3,41 @@
     <div class="background-wrap">
       <div class="background"></div>
     </div>
-    <form>
+    <b-form>
       <h1 id="litheader">AECEND</h1>
       <div class="inset">       
         <p>
-          <input
-          maxlength="15"
+          <b-input
+          maxlength="12"
             type="text"
             name="TenDangNhap"
             v-model="login.username"
             id="TenDangNhap"
             placeholder="Account"
-          /> 
+            ></b-input>
+          <b-form-invalid-feedback :state="validationUsername">
+        Must be 5-12 characters long
+      </b-form-invalid-feedback>
+      <b-form-valid-feedback :state="validationUsername">
+        Looks Good
+      </b-form-valid-feedback>
         </p>
         <p>
-          <input
+          <b-input
             type="password"
             name="MatKhau"
             minlength="6"
-            maxlength="15"
+            maxlength="20"
             v-model="login.password"
             id="MatKhau"
-            placeholder="Password (6-20 characters)"
+            placeholder="Password"
           />
+          <b-form-invalid-feedback :state="validationPassword">
+        Must be 6-20 characters long
+      </b-form-invalid-feedback>
+      <b-form-valid-feedback :state="validationPassword">
+        Looks Good
+      </b-form-valid-feedback>
         </p>
         <div style="text-align: center;">
           <div class="checkboxouter">
@@ -38,7 +50,7 @@
       <p class="p-container">
         <b-btn class="submit" @click.prevent="LogIn" id="go" value="Authorize"> <b-icon icon="forward" scale="1.5"></b-icon> Login</b-btn>
       </p>
-    </form>
+    </b-form>
   </div>
 </template>
 
@@ -53,6 +65,14 @@ export default {
         password: ""
       }
     };
+  },
+  computed:{
+    validationUsername(){
+      return this.login.username.length > 4 && this.login.username.length < 13
+    },
+    validationPassword(){
+      return this.login.password.length > 5 && this.login.password.length < 20
+    }
   },
   methods: {     
    ...mapActions(['docheckLogin','doCheckEmp']),
