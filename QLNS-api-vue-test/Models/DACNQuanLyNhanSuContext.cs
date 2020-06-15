@@ -20,6 +20,7 @@ namespace QLNS_api_vue_test.Models
         public virtual DbSet<Chucvu> Chucvu { get; set; }
         public virtual DbSet<Hopdong> Hopdong { get; set; }
         public virtual DbSet<Nhanvien> Nhanvien { get; set; }
+        public virtual DbSet<Phancong> Phancong { get; set; }
         public virtual DbSet<Phongban> Phongban { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -162,6 +163,23 @@ namespace QLNS_api_vue_test.Models
                     .WithMany(p => p.Nhanvien)
                     .HasForeignKey(d => d.MaPhongBan)
                     .HasConstraintName("FK_PhongBan");
+            });
+
+            modelBuilder.Entity<Phancong>(entity =>
+            {
+                entity.HasKey(e => e.MaPhanCong);
+
+                entity.ToTable("PHANCONG");
+
+                entity.Property(e => e.NoiDungCongViec).HasMaxLength(50);
+
+                entity.Property(e => e.ThoiGianBatDau).HasColumnType("datetime");
+
+                entity.Property(e => e.ThoiGianKetThuc).HasColumnType("datetime");
+
+                entity.Property(e => e.TienDo)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Phongban>(entity =>
