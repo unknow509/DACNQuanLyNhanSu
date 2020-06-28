@@ -93,7 +93,6 @@ export default {
       this.editMode = false
       this.showModal = true
       this.resetForm();
-
     },
     updateDep(name,index){
       this.editMode = true

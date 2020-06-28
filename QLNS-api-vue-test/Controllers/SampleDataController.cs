@@ -160,7 +160,6 @@ namespace QLNS_api_vue_test.Controllers
         {
             try
             {
-                //nhanvien.MaNhanVien = null;
                 db.Entry(phongban).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
                 db.SaveChanges();
