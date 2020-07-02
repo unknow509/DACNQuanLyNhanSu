@@ -17,7 +17,9 @@ namespace QLNS_api_vue_test.Controllers
     [Route("api/[controller]")]
     public class AdminController : Controller
     {
-        private static readonly TelegramBotClient bot = new TelegramBotClient("1251187799:AAFlWJPB64OAWH5aXg0FPaqJ_aZAfj3vlkI");
+        
+        public static readonly TelegramBotClient bot = new TelegramBotClient("1251187799:AAFlWJPB64OAWH5aXg0FPaqJ_aZAfj3vlkI");
+
         private DACNQuanLyNhanSuContext db = new DACNQuanLyNhanSuContext();
          
         [HttpPost("login")]
@@ -39,7 +41,6 @@ namespace QLNS_api_vue_test.Controllers
             {
                 DateTime date = DateTime.Now;
                 date.ToString("dddd, dd MMMM yyyy");
-                date.AddHours(7);
                 var t = await bot.SendTextMessageAsync(-388649962, "khách đã đăng nhập lúc: " + date);
                 return NotFound();
             }

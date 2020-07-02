@@ -29,6 +29,7 @@ namespace QLNS_api_vue_test.Models
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=DESKTOP-08CCL2K;Database=DACNQuanLyNhanSu;Trusted_Connection=True;");
+                //optionsBuilder.UseSqlServer("workstation id = DACNQuanLyNhanSu.mssql.somee.com; packet size = 4096; user id = pbthathu98_SQLLogin_1; pwd = n47rm3ernp; data source = DACNQuanLyNhanSu.mssql.somee.com; persist security info = False; initial catalog = DACNQuanLyNhanSu");
             }
         }
 

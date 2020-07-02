@@ -13,12 +13,12 @@ namespace QLNS_api_vue_test.Controllers
     public class CheckInController : Controller
     {
         private DACNQuanLyNhanSuContext db = new DACNQuanLyNhanSuContext();
-        private static readonly TelegramBotClient bot = new TelegramBotClient("1251187799:AAFlWJPB64OAWH5aXg0FPaqJ_aZAfj3vlkI");
+        public static readonly TelegramBotClient bot = new TelegramBotClient("1251187799:AAFlWJPB64OAWH5aXg0FPaqJ_aZAfj3vlkI");
         //*************************************GET**************************************
         [HttpGet("GetAllPending")]
         public async Task<IActionResult> GetAllPending()
         {
-            try
+            try { 
                 var pending = from nv in db.Nhanvien
                               join ctcc in db.Chitietchamcong
                               on nv.MaNhanVien equals ctcc.MaNhanVien

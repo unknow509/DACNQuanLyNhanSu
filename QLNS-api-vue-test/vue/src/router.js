@@ -7,6 +7,8 @@ import CheckIn from './components/CheckIn.vue'
 import Pending from './components/Pending.vue'
 import HomeEmp from './components/HomeEmp.vue'
 import PersonalInfo from './components/PersonalInfo.vue'
+import Assigne from './components/Assigne.vue'
+import Task from './components/Task.vue'
 
 Vue.use(Router)
 
@@ -47,6 +49,16 @@ export default new Router({
     path:'/personalinfo',
     name: 'personalinfo',
     component: PersonalInfo
+  },
+  {
+    path:'/assigne',
+    name: 'assigne',
+    component: Assigne
+  },
+  {
+    path:'/task',
+    name: 'task',
+    component: Task
   },
   
   

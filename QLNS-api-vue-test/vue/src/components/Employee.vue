@@ -72,13 +72,6 @@
               />
             </div>
             <div class="form-group">
-              <!-- <input
-                v-model="form.gioiTinh"
-                type="text"
-                name="GioiTinh"
-                placeholder="Giới tính"
-                class="form-control"
-              /> -->
               <b-form-select v-model="form.gioiTinh" name="gioiTinh" >
                  <option disabled value="">Giới tính</option>
                 <option value="nam">Nam</option>
@@ -90,7 +83,7 @@
                 v-model="form.ngaySinh"
                 type="text"
                 name="NgaySinh"
-                placeholder="Ngày sinh (dd/mm/yyyy)"
+                placeholder="Ngày sinh (yyyy/mm/dd)"
                 class="form-control"
               />
             </div>
@@ -426,7 +419,8 @@ export default {
       .catch(function(err) {
         console.log("Error: ", err);
       });
-  }
+  },
+
 };
 </script>
 
